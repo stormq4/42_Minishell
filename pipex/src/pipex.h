@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/20 12:10:37 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/03 11:01:40 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/03 15:05:37 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@
 # include <stdio.h>
 # include <limits.h>
 
+/**
+ * @brief struct to store values for the piping.
+ * 
+ * @param f1 is the file descriptor for the file from the input
+ * @param f2 is the ifle descriptor for the file from te output file
+ * @param cmd_count incrementer until max_cmd
+ * @param max_cmd 
+ * @param fd file descriptor for the buffer pipes
+ */
 typedef struct s_pipex {
 	int	f1;
 	int	f2;
@@ -29,6 +38,12 @@ typedef struct s_pipex {
 	int	fd;
 }				t_pipex;
 
+/**
+ * @brief struct to store file descriptor paths
+ * 
+ * @param envp are the envirmoment variables in char**
+ * @param paths_2d paths from enviroment variables where commands can be found
+ */
 typedef struct s_envp {
 	char	**envp;
 	char	**paths_2d;

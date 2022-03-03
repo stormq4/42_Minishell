@@ -6,12 +6,20 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/21 10:46:01 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/01/31 14:45:52 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/03 14:42:18 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+/**
+ * @brief checks for the end of the set of pipes and writes to the
+ * file descriptor of file2 if at the end. If not at the end it 
+ * writes to end[1]
+ * 
+ * @param end pipe of filedescriptors
+ * @param flag file descriptor of file2 or not 
+ */
 static void	check_end_pipe(int *end, int flag)
 {
 	if (flag != -1)
@@ -34,6 +42,15 @@ static void	check_end_pipe(int *end, int flag)
 	}
 }
 
+/**
+ * @brief The child writes to the file descriptor 
+ * p->fd from the stdin and then the stdout to the end[1] pipe and executes
+ * the command.
+ * 
+ * @param end the pipe of fd's
+ * @param p pipex struct
+ * @param flag to check for end of pipe
+ */
 static void	pipex_child(int *end, t_pipex *p, int flag)
 {
 	if (dup2(p->fd, STDIN_FILENO) < 0)
@@ -46,6 +63,14 @@ static void	pipex_child(int *end, t_pipex *p, int flag)
 	close(end[0]);
 }
 
+/**
+ * @brief The parent writes to the end[0] which is returned to the 
+ * fd. It waits for the child to be finished.
+ * 
+ * @param child pid_t variable of the child process
+ * @param end is the pipe of file descriptors
+ * @param p pipex struct
+ */
 static void	pipex_parent(pid_t child, int *end, t_pipex *p)
 {
 	int	status;
@@ -61,6 +86,19 @@ static void	pipex_parent(pid_t child, int *end, t_pipex *p)
 		exit(WEXITSTATUS(status));
 }
 
+/**
+ * @brief Creates a fork where two different processes are run at once
+ * namely the parent and the child. The child writes to the file descriptor 
+ * p->fd from the stdin and then the stdout to the end[1] pipe and executes
+ * the command. The parent writes to the end[0] which is returned to the 
+ * fd.
+ * 
+ * @param p pipex struct
+ * @param cmd command in char* that needs to be executed
+ * @param paths possible paths of the cmd
+ * @param flag for the end of the pipe
+ * @return int which is the file descriptor of end[0]
+ */
 int	fork_pipe(t_pipex *p, char *cmd, t_envp *paths, int flag)
 {
 	int		end[2];
