@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 15:26:58 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/01/31 14:48:05 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/03 11:46:05 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ static char	*find_paths(char **env)
 	return (*env + 5);
 }
 
+/**
+ * @brief 
+ * 
+ * @param p 
+ * @param argv 
+ * @param paths 
+ */
 static void	pipex(t_pipex *p, char **argv, t_envp *paths)
 {
 	p->fd = p->f1;
@@ -30,6 +37,16 @@ static void	pipex(t_pipex *p, char **argv, t_envp *paths)
 	p->fd = fork_pipe(p, argv[p->cmd_count], paths, p->f2);
 	close(p->fd);
 }
+
+/**
+ * @brief starting point of pipex executable. This program reanacts the Pipe |
+ * functionality. And is executed like this --> ./pipex file1 cmd1 cmd2 file2
+ * 
+ * @param argc 
+ * @param argv 
+ * @param envp 
+ * @return int to the computer for succes or error
+ */
 
 int	main(int argc, char **argv, char **envp)
 {
