@@ -6,44 +6,25 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:26:39 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/07 17:03:24 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/07 17:51:38 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "utils.h"
 
-t_token	*realloc_tokens(t_token *tokens, size_t count, size_t size)
-{
-	size_t	i;
-	t_token *new_tokens;
-
-	if (count == 1)
-	{
-		tokens = malloc(count * size);
-		ft_check_malloc(tokens);
-		return (tokens);
-	}
-	new_tokens = malloc(count * size);
-	ft_check_malloc(tokens);
-	i = 0;
-	while (i < count - 1)
-	{
-		new_tokens[i] = tokens[i];
-		i++;
-	}
-	free(tokens);
-	return (new_tokens);
-}
-
 void	find_next_quote(t_lexer *lexer, size_t *i, t_character quote)
 {
-	size_t j;
+	size_t	j;
+	t_token	*token;
 
 	lexer->token_nr++;
-	realloc_tokens(lexer->tokens, lexer->token_nr, sizeof(t_lexer));
 	j = ft_strlen_c(&lexer->cmd_line[*i + j], quote);
-	
+	token->token_id = lexer->token_nr;
+	token->token_data = ft_strdup_c(&lexer->cmd_line[*i + j], quote);
+	token->type = e_word;
+	token = lexer_lstnew(token);
+	lexer_lstadd_back(&lexer->tokens, token);
 }
 
 void categorize_lexer(t_lexer *lexer, size_t *i, char str_i)
