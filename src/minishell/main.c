@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   main.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/04 08:45:09 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/07 13:38:17 by sde-quai      ########   odam.nl         */
+/*   Created: 2022/03/03 17:19:51 by sde-quai      #+#    #+#                 */
+/*   Updated: 2022/03/07 14:55:47 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#include "minishell.h"
 
-# include "libft.h"
-# include "lexer.h"
+int main(int argc, char **argv, char **envp)
+{
+	t_minishell	shell;
 
-// misschien een utils folder aanmaken met dit erin
+	while (1)
+	{
+		lexer(shell.lexer);
+		// lexer
 
-
-typedef struct s_minishell {
-	t_lexer	*lexer;
-}				t_minishell;
-
-#endif
+		// parser
+		// break ;
+	}
+	return (0);
+	// return (0);
+}

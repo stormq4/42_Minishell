@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   utils.h                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/04 08:45:09 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/07 13:38:17 by sde-quai      ########   odam.nl         */
+/*   Created: 2022/03/07 13:36:11 by sde-quai      #+#    #+#                 */
+/*   Updated: 2022/03/07 16:48:25 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#ifndef UTILS_H
+# define UTILS_H
 
-# include "libft.h"
-# include "lexer.h"
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-// misschien een utils folder aanmaken met dit erin
+typedef enum e_bool {
+	false,
+	true
+}			t_bool;
 
+typedef enum e_character {
+	s_quote = 27,
+	d_quote = 22
+}			t_character;
 
-typedef struct s_minishell {
-	t_lexer	*lexer;
-}				t_minishell;
+size_t ft_strlen_c(const char *str, char c);
 
 #endif

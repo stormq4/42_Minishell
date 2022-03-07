@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_strlen_c.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/03 17:19:51 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/03 17:23:18 by sde-quai      ########   odam.nl         */
+/*   Created: 2022/03/07 16:14:53 by sde-quai      #+#    #+#                 */
+/*   Updated: 2022/03/07 16:48:22 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "utils.h"
 
-
-int main(int argc, char **argv, char **envp)
+size_t ft_strlen_c(const char *str, char c)
 {
-        
+	size_t i;
+
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	return (i);
 }
