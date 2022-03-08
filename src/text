@@ -1,0 +1,1 @@
+gcc libft.a  minishell/*.c lexer/*.c ../utils/*.c -lreadline  -I ../inc -o test

@@ -6,24 +6,24 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:26:39 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/08 11:03:32 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/08 15:49:09 by stormdequay   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "lexer.h"
 
-void categorize_lexer(t_lexer *lexer, size_t *i, char str_i)
+void	categorize_lexer(t_lexer *lexer, size_t *i, char str_i)
 {
 	if (str_i == s_quote)
 		find_next_quote(lexer, i, s_quote);
-	else if (str_i = d_quote)
+	else if (str_i == d_quote)
 		find_next_quote(lexer, i, d_quote);
-	else if (str_i = space)
+	else if (str_i == space)
 		return ;
 	else if (ft_isascii(str_i))
 		find_next_space(lexer, i);
-	else if (str_i == pipe)
+	else if (str_i == c_pipe)
 		categorize_pipe(lexer, i);
 	else if (str_i == red_in)
 		categorize_redirects(lexer, i, red_in);

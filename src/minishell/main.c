@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 17:19:51 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/08 14:41:25 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/08 15:51:15 by stormdequay   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ int main(int argc, char **argv, char **envp)
 		free_shell(&shell);
 	}
 	return (0);
-	// return (0);
 }

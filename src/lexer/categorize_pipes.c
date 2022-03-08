@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 09:55:03 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/08 10:13:05 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/08 15:33:24 by stormdequay   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	categorize_pipe(t_lexer *lexer, size_t *i)
 {
-	t_token *token;
+	t_token	*token;
 
 	lexer->token_nr++;
 	token->token_id = lexer->token_nr;

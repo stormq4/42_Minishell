@@ -6,14 +6,15 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 10:31:57 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/08 11:02:00 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/08 15:34:31 by stormdequay   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "lexer.h"
 
-static void	single_redirect(t_lexer *lexer, size_t *i, t_character red, t_token *token)
+static void	single_redirect(t_lexer *lexer, size_t *i, t_character red, \
+t_token *token)
 {
 	token->token_data = malloc(sizeof(char) * 1 + 1);
 	ft_check_malloc(token->token_data);
@@ -26,7 +27,8 @@ static void	single_redirect(t_lexer *lexer, size_t *i, t_character red, t_token 
 	i++;
 }
 
-static void	double_redirect(t_lexer *lexer, size_t *i, t_character red, t_token *token)
+static void	double_redirect(t_lexer *lexer, size_t *i, t_character red, \
+t_token *token)
 {
 	token->token_data = malloc(sizeof(char) * 2 + 1);
 	ft_check_malloc(token->token_data);
@@ -42,7 +44,7 @@ static void	double_redirect(t_lexer *lexer, size_t *i, t_character red, t_token 
 
 void	categorize_redirects(t_lexer *lexer, size_t *i, t_character red)
 {
-	t_token *token;
+	t_token	*token;
 
 	lexer->token_nr++;
 	token->token_id = lexer->token_nr;
