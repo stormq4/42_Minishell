@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   free_shell.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
+/*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/03 17:19:51 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/08 14:41:25 by stormdequay   ########   odam.nl         */
+/*   Created: 2022/03/08 14:35:11 by stormdequay   #+#    #+#                 */
+/*   Updated: 2022/03/08 14:40:17 by stormdequay   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "utils.h"
 #include "minishell.h"
 
-int main(int argc, char **argv, char **envp)
+free_shell(t_minishell *shell)
 {
-	t_minishell	shell;
-
-	while (1)
-	{
-		lexer(shell.lexer);
-		// lexer
-
-		// parser
-		// break ;
-		free_shell(&shell);
-	}
-	return (0);
-	// return (0);
+	lexer_lstclear(lexer);
 }

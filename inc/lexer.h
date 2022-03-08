@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 17:25:03 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/08 11:03:07 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/08 14:37:35 by stormdequay   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	lexer(t_lexer *lexer);
 // lexer_lst.c
 t_token	*lexer_lstnew(t_token *add_token);
 void	lexer_lstadd_back(t_token **lst, t_token *new);
+void	lexer_lstclear(t_token **lst);
 
 // categorize_words.c
 void	find_next_quote(t_lexer *lexer, size_t *i, t_character quote);
