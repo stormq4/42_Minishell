@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlen_c.c                                      :+:    :+:            */
+/*   ft_strdup_len.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
+/*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/07 16:14:53 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/08 16:09:25 by stormdequay   ########   odam.nl         */
+/*   Created: 2022/03/08 16:09:50 by stormdequay   #+#    #+#                 */
+/*   Updated: 2022/03/08 16:20:22 by stormdequay   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-size_t	ft_strlen_c(const char *str, int c)
+char	*ft_strdup_len(const char *str, size_t len)
 {
 	size_t	i;
+	char	*new_str;
 
+	if (ft_strlen(str) < len)
+		len = ft_strlen(str);
+	new_str = malloc(sizeof(char) * (len + 1));
+	ft_check_malloc(new_str);
 	i = 0;
-	while (str[i] && str[i] != c)
+	while (i < len + 1 && str[i])
+	{
+		new_str[i] = str[i];
 		i++;
-	return (i);
+	}
+	new_str[i] = 0;
+	return (new_str);
 }

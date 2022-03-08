@@ -6,12 +6,14 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 17:25:03 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/08 14:37:35 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/08 15:51:05 by stormdequay   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
+
+# include "utils.h"
 
 typedef enum e_token_type {
 	e_word,
@@ -22,7 +24,7 @@ typedef enum e_token_type {
 	e_red_heredoc
 }			t_token_type;
 
-typedef	struct s_token {
+typedef struct s_token {
 	size_t			token_id;
 	char			*token_data;
 	t_token_type	type;
