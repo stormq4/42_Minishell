@@ -6,14 +6,12 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 17:25:03 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/07 17:52:24 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/08 11:03:07 by stormdequay   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
-
-# include "utils.h"
 
 typedef enum e_token_type {
 	e_word,
@@ -38,8 +36,21 @@ typedef struct s_lexer
 	t_token		*tokens;
 }				t_lexer;
 
+// lexer.c
 void	lexer(t_lexer *lexer);
+
+// lexer_lst.c
 t_token	*lexer_lstnew(t_token *add_token);
 void	lexer_lstadd_back(t_token **lst, t_token *new);
+
+// categorize_words.c
+void	find_next_quote(t_lexer *lexer, size_t *i, t_character quote);
+void	find_next_space(t_lexer *lexer, size_t *i);
+
+// categorize_pipes.c
+void	categorize_pipe(t_lexer *lexer, size_t *i);
+
+// categorize_redirects.c
+void	categorize_redirects(t_lexer *lexer, size_t *i, t_character red);
 
 #endif

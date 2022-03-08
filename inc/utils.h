@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:36:11 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/07 16:48:25 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/08 10:28:54 by stormdequay   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,13 @@ typedef enum e_bool {
 
 typedef enum e_character {
 	s_quote = 27,
-	d_quote = 22
+	d_quote = 22,
+	space = 20, 
+	pipe = 124,
+	red_in = 60,
+	red_out = 62
 }			t_character;
 
-size_t ft_strlen_c(const char *str, char c);
+size_t ft_strlen_c(const char *str, int c);
 
 #endif
