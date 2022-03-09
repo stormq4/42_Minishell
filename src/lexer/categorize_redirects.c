@@ -6,13 +6,21 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 10:31:57 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/09 10:26:09 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/09 11:36:35 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-static void	single_redirect(t_lexer *lexer, size_t *i, t_character red, \
+/**
+ * @brief adds a single redirect token to the token link list
+ * 
+ * @param lexer
+ * @param i index for loaction of cmd_line
+ * @param red redirect < or >
+ * @param token lst
+ */
+void	single_redirect(t_lexer *lexer, size_t *i, t_character red, \
 t_token *token)
 {
 	token->token_data = malloc(sizeof(char) * 1 + 1);
@@ -26,6 +34,14 @@ t_token *token)
 	(*i)++;
 }
 
+/**
+ * @brief adds a double redirect token to the token link list
+ * 
+ * @param lexer
+ * @param i index for loaction of cmd_line
+ * @param red redirect < or >
+ * @param token lst
+ */
 static void	double_redirect(t_lexer *lexer, size_t *i, t_character red, \
 t_token *token)
 {
@@ -41,6 +57,13 @@ t_token *token)
 	i += 2;
 }
 
+/**
+ * @brief adds a single or double redirect token to the token link list
+ * 
+ * @param lexer
+ * @param i index for loaction of cmd_line
+ * @param red redirect < or >
+ */
 void	categorize_redirects(t_lexer *lexer, size_t *i, t_character red)
 {
 	t_token	*token;

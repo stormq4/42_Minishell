@@ -6,13 +6,23 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:26:39 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/09 10:25:52 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/09 11:11:54 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-void	categorize_lexer(t_lexer *lexer, size_t *i, char str_i)
+/**
+ * @brief every character in the command line is checked. The index is 
+ * incremented in the given functions. For quotes and ascii (except spaces)
+ * words are generated. For redirects (< and >) redirects tokens are 
+ * generated and for the pipes (|) as well.
+ * 
+ * @param lexer struct
+ * @param i is incremented in the scope int thelexer() function
+ * @param str_i is the charcter being in the cmd_line
+ */
+static void	categorize_lexer(t_lexer *lexer, size_t *i, char str_i)
 {
 	if (str_i == space)
 		return ;
@@ -30,6 +40,14 @@ void	categorize_lexer(t_lexer *lexer, size_t *i, char str_i)
 		categorize_redirects(lexer, i, red_out);
 }
 
+/**
+ * @brief The lexer categorizes (and tokenizes) the string from the 
+ * command line in words, pipes and redirects. The readline prompts 
+ * a string from the commandline. Every charachter is parsed and 
+ * passed to the categorize lexer function.
+ * 
+ * @param lexer struct
+ */
 void	lexer(t_lexer *lexer)
 {
 	size_t	i;

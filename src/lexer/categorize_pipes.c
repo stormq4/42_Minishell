@@ -6,12 +6,20 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 09:55:03 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/09 10:26:05 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/09 11:30:26 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
+/**
+ * @brief if a pipe (|) character is recognized then a pipe new token 
+ * is created
+ * 
+ * @param lexer 
+ * @param i this pointer index is incremented since it cuts a part of the 
+ * string
+ */
 void	categorize_pipe(t_lexer *lexer, size_t *i)
 {
 	t_token	*token;
