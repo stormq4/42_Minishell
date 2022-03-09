@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 17:19:36 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/09 11:28:56 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/09 17:16:35 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,14 @@ t_token	*lexer_lstnew(void)
  */
 t_token	*lexer_lstlast(t_token *lst)
 {
-	if (!lst)
-		return (NULL);
-	while (lst->next != NULL)
+	if (lst == NULL)
+		return (0);
+	while (lst)
+	{
+		if (!lst->next)
+			return (lst);
 		lst = lst->next;
+	}
 	return (lst);
 }
 
@@ -52,34 +56,33 @@ void	lexer_lstadd_back(t_token **lst, t_token *new)
 {
 	t_token	*tmp;
 
-	tmp = *lst;
-	if (!tmp)
+	if (*lst)
 	{
-		tmp = new;
-		return ;
+		tmp = lexer_lstlast(*lst);
+		tmp->next = new;
 	}
-	tmp = lexer_lstlast(tmp);
-	tmp->next = new;
-	new->next = NULL;
+	else
+		*lst = new;
 }
 
 /**
- * @brief clears and frees the list
+ * @brief clears and frees the link list of tokens
  * 
  * @param lst points to the first list of the link list
  */
 void	lexer_lstclear(t_token **lst)
 {
 	t_token	*tmp;
-	t_token	*der_lst;
+	t_token	*deref_lst;
 
 	if (!lst)
 		return ;
-	der_lst = *lst;
-	while (der_lst)
+	deref_lst = *lst;
+	while (deref_lst)
 	{
-		tmp = der_lst;
-		der_lst = der_lst->next;
+		tmp = deref_lst;
+		deref_lst = tmp->next;
+		printf("tmp->token_data --> %s\n", tmp->token_data); // weg
 		free(tmp->token_data);
 		free(tmp);
 	}

@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 09:55:03 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/09 11:30:26 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/09 17:15:30 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,4 @@ void	categorize_pipe(t_lexer *lexer, size_t *i)
 	ft_check_malloc(token->token_data);
 	token->type = e_pipe;
 	lexer_lstadd_back(&lexer->tokens, token);
-	(*i)++;
 }

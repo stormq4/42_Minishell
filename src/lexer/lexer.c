@@ -6,10 +6,11 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:26:39 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/09 11:11:54 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/09 16:21:27 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "lexer.h"
 
 /**
@@ -30,14 +31,14 @@ static void	categorize_lexer(t_lexer *lexer, size_t *i, char str_i)
 		find_next_quote(lexer, i, s_quote);
 	else if (str_i == d_quote)
 		find_next_quote(lexer, i, d_quote);
-	else if (ft_isascii(str_i))
-		find_next_space(lexer, i);
 	else if (str_i == c_pipe)
 		categorize_pipe(lexer, i);
 	else if (str_i == red_in)
 		categorize_redirects(lexer, i, red_in);
 	else if (str_i == red_out)
 		categorize_redirects(lexer, i, red_out);
+	else if (ft_isascii(str_i))
+		find_next_space(lexer, i);
 }
 
 /**
@@ -46,12 +47,14 @@ static void	categorize_lexer(t_lexer *lexer, size_t *i, char str_i)
  * a string from the commandline. Every charachter is parsed and 
  * passed to the categorize lexer function.
  * 
- * @param lexer struct
+ * @param shell struct
+ * @return *t_lexer filled lexer struct
  */
-void	lexer(t_lexer *lexer)
+t_lexer	*lexer(t_lexer *lexer)
 {
 	size_t	i;
 
+	lexer->tokens = NULL;
 	lexer->cmd_line = readline("minishell> ");
 	lexer->token_nr = 0;
 	i = 0;
@@ -60,4 +63,5 @@ void	lexer(t_lexer *lexer)
 		categorize_lexer(lexer, &i, lexer->cmd_line[i]);
 		i++;
 	}
+	return (lexer);
 }

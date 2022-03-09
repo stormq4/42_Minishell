@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   initialize_structs.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/04 08:45:09 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/09 16:05:41 by sde-quai      ########   odam.nl         */
+/*   Created: 2022/03/09 16:02:58 by sde-quai      #+#    #+#                 */
+/*   Updated: 2022/03/09 17:13:25 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-// header files in inc folder
-# include "lexer.h"
+#include "minishell.h"
 
 /**
- * @brief minshell struct
+ * @brief initialize structs within the shell struct
  * 
- * @param lexer struct for lexer
+ * @param shell struct
  */
-typedef struct s_minishell {
-	t_lexer	*lexer;
-}				t_minishell;
-
-// free_shell.c
-void	free_shell(t_minishell *shell);
-
-// initialize_sturcts.c
-void	initialize_structs(t_minishell *shell);
-
-#endif
+void	initialize_structs(t_minishell *shell)
+{
+	shell->lexer = malloc(sizeof(t_lexer));
+	ft_check_malloc(shell->lexer);
+}

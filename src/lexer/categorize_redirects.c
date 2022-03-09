@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 10:31:57 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/09 11:36:35 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/09 15:29:39 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_token *token)
 		token->type = e_red_heredoc;
 	else
 		token->type = e_red_out_append;
-	(*i)++;
 }
 
 /**
@@ -54,7 +53,7 @@ t_token *token)
 		token->type = e_red_in;
 	else
 		token->type = e_red_out_trunc;
-	i += 2;
+	(*i)++;
 }
 
 /**

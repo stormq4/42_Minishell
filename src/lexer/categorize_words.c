@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 09:43:27 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/09 11:16:24 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/09 15:28:50 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	find_next_space(t_lexer *lexer, size_t *i)
 	token->token_id = lexer->token_nr;
 	lexer->token_nr++;
 	j = ft_strlen_c(&lexer->cmd_line[*i], space);
-	token->token_data = ft_strdup_c(&lexer->cmd_line[*i], space);
+	token->token_data = ft_strdup_len(&lexer->cmd_line[*i], j);
 	ft_check_malloc(token->token_data);
 	token->type = e_word;
 	lexer_lstadd_back(&lexer->tokens, token);
-	(*i) += j;
+	(*i) += j - 1;
 }
 
 /**
@@ -55,5 +55,5 @@ void	find_next_quote(t_lexer *lexer, size_t *i, t_character quote)
 	token->token_data = ft_strdup_len(&lexer->cmd_line[*i], j);
 	token->type = e_word;
 	lexer_lstadd_back(&lexer->tokens, token);
-	(*i) += j;
+	(*i) += j - 1;
 }
