@@ -6,22 +6,18 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 17:19:36 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/08 15:58:25 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/09 10:28:11 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
 #include "lexer.h"
 
-t_token	*lexer_lstnew(t_token *add_token)
+t_token	*lexer_lstnew(void)
 {
 	t_token	*new_token;
 
-	if (!add_token)
-		return (NULL);
 	new_token = malloc(sizeof(t_token));
 	ft_check_malloc(new_token);
-	new_token = add_token;
 	new_token->next = NULL;
 	return (new_token);
 }

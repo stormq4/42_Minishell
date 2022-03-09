@@ -6,14 +6,14 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/02 12:56:46 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/01/19 11:36:51 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/09 10:29:04 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-char	*ft_strdup_c(const char *s1, char c)
+char	*ft_strdup_c(const char *s1, int c)
 {
 	char	*s2;
 	size_t	len;
@@ -24,7 +24,7 @@ char	*ft_strdup_c(const char *s1, char c)
 		len++;
 	s2 = malloc(len + 1);
 	if (!s2)
-		return (0);
+		return (NULL);
 	i = 0;
 	while (i < len)
 	{

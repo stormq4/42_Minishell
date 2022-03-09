@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 17:25:03 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/08 15:51:05 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/09 09:56:54 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ typedef struct s_token {
 
 typedef struct s_lexer
 {
-	const char	*cmd_line;
-	size_t		token_nr;
-	t_token		*tokens;
+	char	*cmd_line;
+	size_t	token_nr;
+	t_token	*tokens;
 }				t_lexer;
 
 // lexer.c
 void	lexer(t_lexer *lexer);
 
 // lexer_lst.c
-t_token	*lexer_lstnew(t_token *add_token);
+t_token	*lexer_lstnew(void);
 void	lexer_lstadd_back(t_token **lst, t_token *new);
 void	lexer_lstclear(t_token **lst);
 

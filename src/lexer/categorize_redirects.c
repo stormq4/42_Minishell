@@ -6,11 +6,10 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 10:31:57 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/08 15:34:31 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/09 10:26:09 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
 #include "lexer.h"
 
 static void	single_redirect(t_lexer *lexer, size_t *i, t_character red, \
@@ -24,7 +23,7 @@ t_token *token)
 		token->type = e_red_heredoc;
 	else
 		token->type = e_red_out_append;
-	i++;
+	(*i)++;
 }
 
 static void	double_redirect(t_lexer *lexer, size_t *i, t_character red, \
@@ -46,12 +45,12 @@ void	categorize_redirects(t_lexer *lexer, size_t *i, t_character red)
 {
 	t_token	*token;
 
-	lexer->token_nr++;
+	token = lexer_lstnew();
 	token->token_id = lexer->token_nr;
+	lexer->token_nr++;
 	if (lexer->cmd_line[*i + 1] == red)
 		double_redirect(lexer, i, red, token);
 	else
 		single_redirect(lexer, i, red, token);
-	token = lexer_lstnew(token);
 	lexer_lstadd_back(&lexer->tokens, token);
 }

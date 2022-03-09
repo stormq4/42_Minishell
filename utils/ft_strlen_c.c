@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 16:14:53 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/08 16:09:25 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/09 10:11:34 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ size_t	ft_strlen_c(const char *str, int c)
 
 	i = 0;
 	while (str[i] && str[i] != c)
+		i++;
+	if (str[i] == c)
 		i++;
 	return (i);
 }
