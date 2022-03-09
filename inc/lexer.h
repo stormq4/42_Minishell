@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 17:25:03 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/09 09:56:54 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/09 11:47:02 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include "utils.h"
 
+/**
+ * @brief enum for types of token to categorize them
+ * 
+ */
 typedef enum e_token_type {
 	e_word,
 	e_pipe,
@@ -24,6 +28,14 @@ typedef enum e_token_type {
 	e_red_heredoc
 }			t_token_type;
 
+/**
+ * @brief token struct in a link list
+ * 
+ * @param token_id starting from 0 in ascending order
+ * @param token_data char * string of the partial cmd line
+ * @param type enum for type of token
+ * @param next points to the next s_token struct
+ */
 typedef struct s_token {
 	size_t			token_id;
 	char			*token_data;
@@ -31,6 +43,12 @@ typedef struct s_token {
 	struct s_token	*next;
 }				t_token;
 
+/**
+ * @brief lexer struct which holds the data of the lexer
+ * 
+ * @param cmd_line line read from the command line
+ * @param token_nr total number of tokens
+ */
 typedef struct s_lexer
 {
 	char	*cmd_line;

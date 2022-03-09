@@ -6,13 +6,14 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:36:11 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/09 10:04:11 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/09 11:42:09 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
+// necessary libraries
 # include "libft.h"
 # include <stdio.h>
 # include <readline/readline.h>
@@ -20,11 +21,19 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+/**
+ * @brief enum for boolean
+ * 
+ */
 typedef enum e_bool {
 	false,
 	true
 }			t_bool;
 
+/**
+ * @brief enum for assigning ascii values to characters
+ * 
+ */
 typedef enum e_character {
 	s_quote = 39,
 	d_quote = 34,
@@ -34,7 +43,10 @@ typedef enum e_character {
 	red_out = 62
 }			t_character;
 
+// ft_strlen_c.c
 size_t	ft_strlen_c(const char *str, int c);
+
+// ft_strdup_len.c
 char	*ft_strdup_len(const char *str, size_t len);
 
 #endif
