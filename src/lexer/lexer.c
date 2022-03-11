@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:26:39 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/09 16:21:27 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/11 12:59:01 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	categorize_lexer(t_lexer *lexer, size_t *i, char str_i)
 	else if (str_i == d_quote)
 		find_next_quote(lexer, i, d_quote);
 	else if (str_i == c_pipe)
-		categorize_pipe(lexer, i);
+		categorize_pipe(lexer);
 	else if (str_i == red_in)
 		categorize_redirects(lexer, i, red_in);
 	else if (str_i == red_out)
@@ -55,7 +55,6 @@ t_lexer	*lexer(t_lexer *lexer)
 	size_t	i;
 
 	lexer->tokens = NULL;
-	lexer->cmd_line = readline("minishell> ");
 	lexer->token_nr = 0;
 	i = 0;
 	while (lexer->cmd_line[i])

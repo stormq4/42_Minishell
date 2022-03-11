@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 09:55:03 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/09 17:15:30 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/11 12:27:56 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @param i this pointer index is incremented since it cuts a part of the 
  * string
  */
-void	categorize_pipe(t_lexer *lexer, size_t *i)
+void	categorize_pipe(t_lexer *lexer)
 {
 	t_token	*token;
 

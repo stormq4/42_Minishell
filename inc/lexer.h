@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 17:25:03 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/09 16:00:23 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/11 12:28:09 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	find_next_quote(t_lexer *lexer, size_t *i, t_character quote);
 void	find_next_space(t_lexer *lexer, size_t *i);
 
 // categorize_pipes.c
-void	categorize_pipe(t_lexer *lexer, size_t *i);
+void	categorize_pipe(t_lexer *lexer);
 
 // categorize_redirects.c
 void	categorize_redirects(t_lexer *lexer, size_t *i, t_character red);

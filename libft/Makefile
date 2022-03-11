@@ -76,11 +76,9 @@ all : $(NAME)
 
 %.o : %.c $(HEADFILES)
 	@$(CC) -c $(CFLAGS) -o $@ $<
-	
-
 
 $(NAME): $(ALL_OBJS)
-	@echo $(GREEN)"Object files created [OK]"
+	@echo $(GREEN)"Object files created for LIBFT [OK]"
 	@ar -ru $(NAME) $^
 
 bonus:
