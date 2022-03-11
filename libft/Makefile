@@ -86,11 +86,11 @@ bonus:
 
 clean:
 	@rm -f $(OBJS) $(OBJS_BONUS)
-	@echo $(RED) "Deleting object files from libft"
+	@echo $(RED) "Deleting object files from libft [OK]"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo $(RED) "Deleting library file libft.a"
+	@echo $(RED) "Deleting library file libft.a [OK]"
 
 re: fclean all
 

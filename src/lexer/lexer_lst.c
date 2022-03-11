@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 17:19:36 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/09 17:16:35 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/11 19:02:35 by stormdequay   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	lexer_lstclear(t_token **lst)
 	{
 		tmp = deref_lst;
 		deref_lst = tmp->next;
-		printf("tmp->token_data --> %s\n", tmp->token_data); // weg
 		free(tmp->token_data);
 		free(tmp);
 	}
 }
+		// printf("tmp->token_data --> %s\n", tmp->token_data); // weg
