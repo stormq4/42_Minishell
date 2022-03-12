@@ -59,7 +59,8 @@ SRC_LEXER :=		$(addprefix $(DIR_SRC)/$(DIR_LEXER)/, $(LEXER))
 # Utils directory with files
 DIR_UTILS :=		utils
 UTILS := 			ft_strdup_len.c \
-					ft_strlen_c.c
+					ft_strlen_c.c \
+					find_min.c
 
 SRC_UTILS :=		$(addprefix $(DIR_SRC)/$(DIR_UTILS)/, $(UTILS))
 
@@ -82,6 +83,12 @@ RED := 				"\033[0;31m"
 
 ## Commands
 all : $(NAME)
+
+run : all
+	./$(NAME)
+
+drun : all
+	lldb $(NAME)
 
 echo:
 	@echo $(OBJ)
@@ -111,31 +118,3 @@ fclean : clean
 re : fclean all
 
 .PHONY: all, clean, fclean, re
-
-# O_MAIN_PATH := $(OBJ_DIR)/$(DIR_SRC)/$(DIR_MAIN)
-# O_MINISHELL_PATH := $(OBJ_DIR)/$(DIR_SRC)/$(DIR_MINISHELL)
-# O_LEXER_PATH := $(OBJ_DIR)/$(DIR_SRC)/$(DIR_LEXER)
-# O_UTILS_PATH := $(OBJ_DIR)/$(DIR_SRC)/$(DIR_UTILS)
-
-# OBJ_MAIN := $(MAIN:%.c=$(O_MAIN_PATH)/%.o)
-# OBJ_MINISHELL := $(MINISHELL:%.c=$(O_MINISHELL_PATH)/%.o)
-# OBJ_LEXER := $(LEXER:%.c=$(O_LEXER_PATH)/%.o)
-# OBJ_UTILS := $(UTILS:%.c=$(O_UTILS_PATH)/%.o)
-# OBJ := $(OBJ_MAIN) $(OBJ_MINISHELL) $(OBJ_LEXER) $(OBJ_UTILS)
-
-
-# $(O_UTILS_PATH)/%.o : $(DIR_SRC)/$(DIR_UTILS)/%.c
-# 	@mkdir -p $(dir $@)
-# 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-
-# $(O_MAIN_PATH)/%.o : $(DIR_SRC)/$(DIR_MAIN)/%.c
-# 	@mkdir -p $(dir $@)
-# 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-
-# $(O_MINISHELL_PATH)/%.o : $(DIR_SRC)/$(DIR_MINISHELL)/%.c
-# 	@mkdir -p $(dir $@)
-# 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-
-# $(O_LEXER_PATH)/%.o : $(DIR_SRC)/$(DIR_LEXER)/%.c 
-# 	@mkdir -p $(dir $@)
-# 	$(CC) $(CFLAGS) $(INC) -c $< -o $@

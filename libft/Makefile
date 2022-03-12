@@ -72,7 +72,7 @@ RED := "\033[0;31m"
 GREEN := "\033[1;32m"
 CYAN := "\033[1;36m"
 
-all : $(NAME)
+all : $(NAME) 
 
 %.o : %.c $(HEADFILES)
 	@$(CC) -c $(CFLAGS) -o $@ $<

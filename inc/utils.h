@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:36:11 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/09 15:54:08 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/12 11:54:39 by stormdequay   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,8 @@ size_t	ft_strlen_c(const char *str, int c);
 
 // ft_strdup_len.c
 char	*ft_strdup_len(const char *str, size_t len);
+
+// find_min.c
+size_t	find_min_size_t(size_t *nr_arr, size_t len);
 
 #endif
