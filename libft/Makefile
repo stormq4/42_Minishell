@@ -68,7 +68,7 @@ else
 ALL_OBJS = $(OBJS)
 endif
 
-RED := "\033[0;31m"
+RED := "\033[1;31m"
 GREEN := "\033[1;32m"
 CYAN := "\033[1;36m"
 
