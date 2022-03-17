@@ -5,14 +5,18 @@ NAME := minishell
 
 
 ## Flags and Compilers
-ifdef sanitize
-CFLAGS := 			-Wall -fsanitize=address -Wextra -g
+ifndef sanitize
+
+CFLAGS := 				-Wall -fsanitize=address -Wextra -g
+
 else
-CFLAGS := 			-Wall -Wextra -Werror
+
+export CFLAGS := 		-Wall -Wextra -Werror -g
+
 endif
 
-READLINE := 		-lreadline -I/Volumes/Storage/cache/sde-quai/Library/Logs/Homebrew/readline
-CC := 				gcc
+export READLINE := 		-lreadline -I/Volumes/Storage/cache/sde-quai/Library/Logs/Homebrew/readline
+export CC := 			gcc
 
 
 ## Headerfiles
@@ -68,6 +72,7 @@ SRC_UTILS :=		$(addprefix $(DIR_SRC)/$(DIR_UTILS)/, $(UTILS))
 # All Source Files in variable
 SRC :=				$(SRC_UTILS) $(SRC_LEXER) $(SRC_MINISHELL) $(SRC_MAIN)
 
+export	SRC_TEST := $(SRC_UTILS) $(SRC_LEXER) $(SRC_MINISHELL)
 
 ## Object files from source files
 OBJ_DIR :=			obj
@@ -76,29 +81,37 @@ OBJ :=				$(OBJ_C:%.c=%.o)
 
 
 ## Colors
-GREEN := 			"\033[1;32m"
-CYAN := 			"\033[1;36m"
-RED := 				"\033[1;31m"
+export GREEN := 			"\033[1;32m"
+export CYAN := 			"\033[1;36m"
+export RED := 				"\033[1;31m"
+export PURPLE := 			"\033[1;35m"
 
 
 ## Commands
 all : $(NAME)
 
 run : all
-	./$(NAME)
+	@./$(NAME)
 
 drun : all
-	lldb $(NAME)
+	@lldb $(NAME)
 
-echo:
-	@echo $(OBJ)
+# echo :
+#@echo $(OBJ)
+
+sanitize : fclean
+	@$(MAKE) sanitize=1
+	@echo $(PURPLE)"Compiled with sanitize=address [OK]"
+
+test : fclean
+	$(MAKE) -C unit_test test
 
 $(LIBA) :
-	$(MAKE) -C $(LIBFT)
+	@$(MAKE) -C $(LIBFT)
 
 $(NAME) : $(LIBA) $(OBJ)
 	@echo $(CYAN)"Object files created for MINISHELL [OK]"
-	@$(CC) $(OBJ) $(INC) $(LIBA) $(READLINE) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(INC) $(LIBA) $(READLINE) -o $(NAME)
 	@echo $(GREEN)"MINISHELL compiled [OK]"
 
 $(OBJ_DIR)/%.o : %.c
@@ -112,7 +125,7 @@ clean :
 
 fclean : clean
 	@$(MAKE) fclean -C $(LIBFT)
-	@rm $(NAME)
+	@rm -rf $(NAME)
 	@echo $(RED) "Deleting MINISHELL Executable [OK]"
 
 re : fclean all

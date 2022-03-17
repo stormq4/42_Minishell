@@ -6,13 +6,12 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 17:19:51 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/11 19:03:48 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/15 14:40:56 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// add parser expander
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	shell;
