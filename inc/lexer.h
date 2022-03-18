@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 17:25:03 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/18 16:28:23 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/18 16:36:47 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef enum e_token_type {
 	e_d_in,
 	e_s_out,
 	e_d_out,
+	e_red_in,
 	e_red_out_trunc,
 	e_red_out_append,
 	e_red_heredoc

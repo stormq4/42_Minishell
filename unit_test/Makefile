@@ -16,7 +16,7 @@ LIBA :=					../libft/libft.a
 
 SRC :=					$(SRC_TEST) 
 
-SRC_UT :=				main.c 
+SRC_UT :=				src/main.c
 
 SRC_UNITC := 			unity/src/unity.c \
 						unity/extras/fixture/src/unity_fixture.c
@@ -36,7 +36,6 @@ test : $(NAME)
 
 $(LIBA) :
 	@$(MAKE) -C $(LIBFT)
-	@echo LIBFT!!!!
 
 # echo :
 # 	@echo this is src: $(SRC)
