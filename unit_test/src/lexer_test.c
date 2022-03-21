@@ -6,15 +6,25 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/18 10:14:19 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/21 15:09:11 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/21 15:18:47 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tester.h"
 
+/**
+ * @param tokens global list variable that is adjusted every test with 
+ * new input
+ * @param begin global variable to assign beginning of the link list
+ */
 t_token	*tokens;
 t_token *begin;
 
+/**
+ * @brief creates token from the lexer and puts cmd_line inside
+ * 
+ * @param cmd_line is converted by the lexer to tokens
+ */
 static void	test_setup(const char *cmd_line)
 {
 	tokens = lexer(cmd_line);
@@ -22,17 +32,25 @@ static void	test_setup(const char *cmd_line)
 	TEST_ASSERT_NOT_NULL(tokens);
 }
 
+/**
+ * @brief function to test if the string inside the tokens->token_data is 
+ * equal to the testers string by valuating length and the content of the
+ * given string. The corresponding type of the token is compared with the 
+ * tokens->type and type;
+ * 
+ * @param test_string 
+ * @param type 
+ */
 static void	compare_tokens(const char *test_string, t_token_type type)
 {
 	size_t	len;
 
 	if (!tokens)
 	{
-		printf("No token found");
+		printf("No new token found");
 		TEST_ABORT();
 		return ;
 	}
-	TEST_ASSERT_NOT_NULL(tokens);
 	TEST_ASSERT_EQUAL_INT16(type, tokens->type);
 	TEST_ASSERT_EQUAL_STRING(test_string, tokens->token_data);
 	len = ft_strlen(tokens->token_data);
@@ -42,6 +60,10 @@ static void	compare_tokens(const char *test_string, t_token_type type)
 
 void	setUp(void)	{}
 
+/**
+ * @brief clears the list of tokens
+ * 
+ */
 void	tearDown(void)
 {
 	lexer_lstclear(&begin);

@@ -1,5 +1,6 @@
 # -*- Makefile -*-
 
+## EXECUTABLE
 NAME := 				tester
 
 ## INCLUDES
