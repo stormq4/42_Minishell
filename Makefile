@@ -86,6 +86,8 @@ export CYAN := 			"\033[1;36m"
 export RED := 				"\033[1;31m"
 export PURPLE := 			"\033[1;35m"
 
+## Unit_test
+UNIT_TEST := unit_test
 
 ## Commands
 all : $(NAME)
@@ -101,7 +103,7 @@ sanitize : fclean
 	@echo $(PURPLE)"Compiled with sanitize=address [OK]"
 
 test : fclean
-	$(MAKE) -C unit_test test
+	@$(MAKE) -C $(UNIT_TEST) test
 
 $(LIBA) :
 	@$(MAKE) -C $(LIBFT)
@@ -122,6 +124,7 @@ clean :
 
 fclean : clean
 	@$(MAKE) fclean -C $(LIBFT)
+	@$(MAKE) fclean -C $(UNIT_TEST)
 	@rm -rf $(NAME)
 	@echo $(RED) "Deleting MINISHELL Executable [OK]"
 
