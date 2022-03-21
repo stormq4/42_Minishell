@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:26:39 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/21 12:05:12 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/21 15:20:45 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ t_token	*lexer(const char *cmd_line)
 	
 	(void)cmd_line;
 	token = lexer_lstnew();
-	token->token_data = ft_strdup("hallloooo");
+	token->token_data = ft_strdup("testing");
 	token->token_id = 4;
-	token->type = e_d_in;
+	token->type = e_word;
 	token->next = NULL;
 	return (token);
 }

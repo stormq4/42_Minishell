@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/18 10:14:19 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/21 15:18:47 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/21 15:22:00 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ static void	test_4()
 
 static void	test_5()
 {
-	test_setup("echo \'$HOME\"\"\"\'    >test.txt");
+	test_setup("<echo \'$HOME\"\"\"\'    >test.txt");
+	compare_tokens("<", e_s_in);
 	compare_tokens("echo", e_word);
 	compare_tokens("\'$HOME\"\"\"\'", e_word);
 	compare_tokens(">", e_s_out);
@@ -133,7 +134,8 @@ static void	test_6()
 
 static void	test_7()
 {
-	test_setup(" \"HELLO\"  \"HELLO\"\'WORLD\' ");
+	test_setup("<< \"HELLO\"  \"HELLO\"\'WORLD\' ");
+	compare_tokens("<<", e_d_in);
 	compare_tokens("\"HELLO\"", e_word);
 	compare_tokens("\"HELLO\"", e_word);
 	compare_tokens("\'WORLD\'", e_word);

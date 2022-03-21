@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/21 10:11:32 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/21 15:03:11 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/21 15:23:16 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 int		main(int argc, char **argv, char **envp)
 {
-	int	check;
+	int	nr_fails;
 
-	// setbuf(stdout, NULL);
-	// setbuf(stderr, NULL);
 	(void)argc;
 	(void)argv;
 	(void)envp;
-	check = lexer_test();
-	printf("#NR of tests in done in Lexer-->: %d\n", check);
+	nr_fails = lexer_test();
+	printf("#NR of failes in lexer -->: %d\n", nr_fails);
 	return (0);
 }
