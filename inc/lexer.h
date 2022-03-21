@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 17:25:03 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/18 16:36:47 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/21 10:46:17 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ typedef struct s_lexer
 }				t_lexer;
 
 // lexer.c
-t_lexer	*lexer(t_lexer *lexer);
+// t_lexer	*lexer(t_lexer *lexer);
+t_token	*lexer(const char *cmd_line);
 
 // lexer_lst.c
 t_token	*lexer_lstnew(void);

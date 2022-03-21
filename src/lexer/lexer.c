@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:26:39 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/11 19:03:55 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/21 12:05:12 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,31 @@ static void	categorize_lexer(t_lexer *lexer, size_t *i, char str_i)
  * @param shell struct
  * @return *t_lexer filled lexer struct
  */
-t_lexer	*lexer(t_lexer *lexer)
-{
-	size_t	i;
+// t_lexer	*lexer(t_lexer *lexer)
+// {
+// 	size_t	i;
 
-	lexer->tokens = NULL;
-	lexer->token_nr = 0;
-	i = 0;
-	while (lexer->cmd_line[i])
-	{
-		categorize_lexer(lexer, &i, lexer->cmd_line[i]);
-		i++;
-	}
-	return (lexer);
+// 	lexer->tokens = NULL;
+// 	lexer->token_nr = 0;
+// 	i = 0;
+// 	while (lexer->cmd_line[i])
+// 	{
+// 		categorize_lexer(lexer, &i, lexer->cmd_line[i]);
+// 		i++;
+// 	}
+// 	return (lexer);
+// }
+
+
+t_token	*lexer(const char *cmd_line)
+{
+	t_token	*token;
+	
+	(void)cmd_line;
+	token = lexer_lstnew();
+	token->token_data = ft_strdup("hallloooo");
+	token->token_id = 4;
+	token->type = e_d_in;
+	token->next = NULL;
+	return (token);
 }

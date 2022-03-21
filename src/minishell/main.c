@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 17:19:51 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/15 14:40:56 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/21 10:02:00 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	main(int argc, char **argv, char **envp)
 	{
 		initialize_structs(&shell);
 		shell.lexer->cmd_line = readline("minishell> ");
-		shell.lexer = lexer(&*shell.lexer);
-		free_shell(&shell);
+		// shell.lexer = lexer(&*shell.lexer);
+		// free_shell(&shell);
 	}
 	return (0);
 }

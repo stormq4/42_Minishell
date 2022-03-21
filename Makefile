@@ -96,9 +96,6 @@ run : all
 drun : all
 	@lldb $(NAME)
 
-# echo :
-#@echo $(OBJ)
-
 sanitize : fclean
 	@$(MAKE) sanitize=1
 	@echo $(PURPLE)"Compiled with sanitize=address [OK]"
