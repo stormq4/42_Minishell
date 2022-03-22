@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/18 10:14:19 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/21 15:22:00 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/22 15:47:52 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,11 @@ static void	test_5()
 
 static void	test_6()
 {
-	test_setup("ls <<>>><> | | \"cat -e\"       cookies");
+	test_setup("ls<<>>><> | | \"cat -e\"       cookies");
 	compare_tokens("ls", e_word);
 	compare_tokens("<<", e_d_in);
 	compare_tokens(">>", e_d_out);
+	compare_tokens(">", e_s_out);
 	compare_tokens("<", e_s_in);
 	compare_tokens(">", e_s_out);
 	compare_tokens("|", e_pipe);
@@ -146,14 +147,15 @@ static void	test_8()
 	test_setup("echo \'$HOME\"\"\"\'    >test.txt");
 	compare_tokens("echo", e_word);
 	compare_tokens("\'$HOME\"\"\"\'", e_word);
-	compare_tokens(">", e_red_out_trunc);
+	compare_tokens(">", e_s_out);
 	compare_tokens("test.txt", e_word);
 }
 
 static void	test_9()
 {
 	test_setup("funny\"test\'\'\'\" || >> hi << test.txt");
-	compare_tokens("funny\"test\'\'\'\"", e_word);
+	compare_tokens("funny", e_word);
+	compare_tokens("\"test\'\'\'\"", e_word);
 	compare_tokens("|", e_pipe);
 	compare_tokens("|", e_pipe);
 	compare_tokens(">>", e_d_out);
@@ -164,19 +166,58 @@ static void	test_9()
 
 static void	test_10()
 {
-	test_setup("cat | ls >>> < < >> << | echo HELLOOO world");
+	test_setup("cat | ls>>> < < >> << | echo HELLOOO world");
 	compare_tokens("cat", e_word);
 	compare_tokens("|", e_pipe);
-	compare_tokens("cls", e_word);
+	compare_tokens("ls", e_word);
 	compare_tokens(">>", e_d_out);
 	compare_tokens(">", e_s_out);
 	compare_tokens("<", e_s_in);
 	compare_tokens("<", e_s_in);
 	compare_tokens(">>", e_d_out);
 	compare_tokens("<<", e_d_in);
+	compare_tokens("|", e_pipe);
 	compare_tokens("echo", e_word);
 	compare_tokens("HELLOOO", e_word);
 	compare_tokens("world", e_word);
+}
+
+static void	test_11()
+{
+	test_setup("\"echo\" $HOME>");
+	compare_tokens("\"echo\"", e_word);
+	compare_tokens("$HOME", e_word);
+	compare_tokens(">", e_s_out);
+}
+
+static void	test_12()
+{
+	test_setup("\"accept meeeee");
+	compare_tokens("\"accept meeeee", e_word);
+}
+
+static void	test_13()
+{
+	test_setup("echo testje\"");
+	compare_tokens("echo", e_word);
+	compare_tokens("testje", e_word);
+	compare_tokens("\"", e_word);
+}
+
+static void test_14()
+{
+	test_setup("cat |ls|");
+	compare_tokens("cat", e_word);
+	compare_tokens("|", e_pipe);
+	compare_tokens("ls", e_word);
+	compare_tokens("|", e_pipe);
+}
+
+
+static void test_15()
+{
+	test_setup("\"");
+	compare_tokens("\"", e_word);
 }
 
 int	lexer_test(void)
@@ -192,5 +233,10 @@ int	lexer_test(void)
 	RUN_TEST(test_8);
 	RUN_TEST(test_9);
 	RUN_TEST(test_10);
+	RUN_TEST(test_11);
+	RUN_TEST(test_12);
+	RUN_TEST(test_13);
+	RUN_TEST(test_14);
+	RUN_TEST(test_15);
 	return (UNITY_END());
 }

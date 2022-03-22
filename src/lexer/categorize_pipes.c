@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 09:55:03 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/11 12:27:56 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/22 11:18:10 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,13 @@
  * @param i this pointer index is incremented since it cuts a part of the 
  * string
  */
-void	categorize_pipe(t_lexer *lexer)
+void	categorize_pipe(t_token **tokens)
 {
-	t_token	*token;
+	t_token	*new;
 
-	token = lexer_lstnew();
-	token->token_id = lexer->token_nr;
-	lexer->token_nr++;
-	token->token_data = ft_strdup("|");
-	ft_check_malloc(token->token_data);
-	token->type = e_pipe;
-	lexer_lstadd_back(&lexer->tokens, token);
+	new = lexer_lstnew();
+	new->token_data = ft_strdup("|");
+	ft_check_malloc(new->token_data);
+	new->type = e_pipe;
+	lexer_lstadd_back(tokens, new);
 }

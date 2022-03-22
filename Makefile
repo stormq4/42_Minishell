@@ -5,13 +5,11 @@ NAME := minishell
 
 
 ## Flags and Compilers
-ifndef sanitize
+export CFLAGS := 		-Wall -Wextra -Werror -g
+
+ifdef sanitize
 
 CFLAGS := 				-Wall -fsanitize=address -Wextra -g
-
-else
-
-export CFLAGS := 		-Wall -Wextra -Werror -g
 
 endif
 
@@ -78,7 +76,6 @@ export	SRC_TEST := $(SRC_UTILS) $(SRC_LEXER) $(SRC_MINISHELL)
 OBJ_DIR :=			obj
 OBJ_C :=			$(addprefix $(OBJ_DIR)/, $(SRC))
 OBJ :=				$(OBJ_C:%.c=%.o)
-
 
 ## Colors
 export GREEN := 			"\033[1;32m"

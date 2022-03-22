@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:26:39 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/21 15:20:45 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/22 15:20:55 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,23 @@
  * @param i is incremented in the scope int thelexer() function
  * @param str_i is the charcter being in the cmd_line
  */
-static void	categorize_lexer(t_lexer *lexer, size_t *i, char str_i)
+static void	categorize_cmd_line(t_token **tokens, size_t *i, char str_i, \
+const char *cmd_line)
 {
 	if (str_i == space)
 		return ;
 	else if (str_i == s_quote)
-		find_next_quote(lexer, i, s_quote);
+		find_next_quote(tokens, i, s_quote, cmd_line);
 	else if (str_i == d_quote)
-		find_next_quote(lexer, i, d_quote);
+		find_next_quote(tokens, i, d_quote, cmd_line);
 	else if (str_i == c_pipe)
-		categorize_pipe(lexer);
+		categorize_pipe(tokens);
 	else if (str_i == red_in)
-		categorize_redirects(lexer, i, red_in);
+		categorize_redirects(tokens, i, red_in, cmd_line);
 	else if (str_i == red_out)
-		categorize_redirects(lexer, i, red_out);
+		categorize_redirects(tokens, i, red_out, cmd_line);
 	else if (ft_isascii(str_i))
-		find_next_space(lexer, i);
+		find_next_word(tokens, i, cmd_line); //quotes and redirects as well
 }
 
 /**
@@ -50,31 +51,19 @@ static void	categorize_lexer(t_lexer *lexer, size_t *i, char str_i)
  * @param shell struct
  * @return *t_lexer filled lexer struct
  */
-// t_lexer	*lexer(t_lexer *lexer)
-// {
-// 	size_t	i;
-
-// 	lexer->tokens = NULL;
-// 	lexer->token_nr = 0;
-// 	i = 0;
-// 	while (lexer->cmd_line[i])
-// 	{
-// 		categorize_lexer(lexer, &i, lexer->cmd_line[i]);
-// 		i++;
-// 	}
-// 	return (lexer);
-// }
-
-
 t_token	*lexer(const char *cmd_line)
 {
-	t_token	*token;
-	
-	(void)cmd_line;
-	token = lexer_lstnew();
-	token->token_data = ft_strdup("testing");
-	token->token_id = 4;
-	token->type = e_word;
-	token->next = NULL;
-	return (token);
+	t_token	*tokens;
+	size_t	i;
+	size_t	len;
+
+	tokens = NULL;
+	len = ft_strlen(cmd_line);
+	i = 0;
+	while (i < len)
+	{
+		categorize_cmd_line(&tokens, &i, cmd_line[i], cmd_line);
+		i++;
+	}
+	return (tokens);
 }

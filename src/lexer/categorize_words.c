@@ -6,11 +6,26 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 09:43:27 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/12 12:11:38 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/22 15:45:38 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+
+static size_t find_min_char(const char *cmd_line, size_t *i)
+{
+	size_t	j_n[6];
+	size_t	j;
+
+	j_n[0] = ft_strlen_c(&cmd_line[*i], space);
+	j_n[1] = ft_strlen_c(&cmd_line[*i], s_quote);
+	j_n[2] = ft_strlen_c(&cmd_line[*i], d_quote);
+	j_n[3] = ft_strlen_c(&cmd_line[*i], red_in);
+	j_n[4] = ft_strlen_c(&cmd_line[*i], red_out);
+	j_n[5] = ft_strlen_c(&cmd_line[*i], c_pipe);
+	j = find_min_size_t(j_n, 6);
+	return (j);
+}
 
 /**
  * @brief If a ascii character (except space ) is found the next space or
@@ -19,33 +34,19 @@
  * @param lexer struct 
  * @param i this pointer index is increased since it cuts a part of the string
  */
-void	find_next_space(t_lexer *lexer, size_t *i)
+void	find_next_word(t_token **tokens, size_t *i, const char *cmd_line)
 {
-	size_t	min_j[3];
 	size_t	j;
-	t_token	*token;
+	t_token	*new;
 
-	token = lexer_lstnew();
-	token->token_id = lexer->token_nr;
-	lexer->token_nr++;
-	min_j[0] = ft_strlen_c(&lexer->cmd_line[*i], space);
-	min_j[1] = ft_strlen_c(&lexer->cmd_line[*i], s_quote);
-	min_j[2] = ft_strlen_c(&lexer->cmd_line[*i], d_quote);
-	j = find_min_size_t(min_j, 3);
-	token->token_data = ft_strdup_len(&lexer->cmd_line[*i], j);
-	ft_check_malloc(token->token_data);
-	token->type = e_word;
-	lexer_lstadd_back(&lexer->tokens, token);
-	// if (lexer->cmd_line[*i + j - 1] == space || \
-	// lexer->cmd_line[*i + j - 1] == s_quote || \
-	// lexer->cmd_line[*i + j - 1] == d_quote)
-	// 	(*i) += j - 2;
-	// else
-	// 	(*i) += j - 1;
+	new = lexer_lstnew();
+	j = find_min_char(cmd_line, i);
+	new->token_data = ft_strdup_len(&cmd_line[*i], j);	
+	ft_check_malloc(new->token_data);
+	new->type = e_word;
+	lexer_lstadd_back(tokens, new);
 	(*i) += j - 1;
-	
 }
-	// review this above sentence line 39
 
 /**
  * @brief This function finds the next quote pair and generates a token with
@@ -55,17 +56,16 @@ void	find_next_space(t_lexer *lexer, size_t *i)
  * @param i this pointer index is increased since it cuts a part of the string
  * @param quote single quote or double quote
  */
-void	find_next_quote(t_lexer *lexer, size_t *i, t_character quote)
+void	find_next_quote(t_token **tokens, size_t *i, t_character quote, \
+const char *cmd_line)
 {
 	size_t	j;
-	t_token	*token;
+	t_token	*new;
 
-	token = lexer_lstnew();
-	token->token_id = lexer->token_nr;
-	lexer->token_nr++;
-	j = ft_strlen_c(&lexer->cmd_line[*i + 1], quote) + 1;
-	token->token_data = ft_strdup_len(&lexer->cmd_line[*i], j);
-	token->type = e_word;
-	lexer_lstadd_back(&lexer->tokens, token);
-	(*i) += j - 1;
+	new = lexer_lstnew();
+	j = ft_strlen_c(&cmd_line[*i + 1], quote) + 1;
+	new->token_data = ft_strdup_len(&cmd_line[*i], j + 1);
+	new->type = e_word;
+	lexer_lstadd_back(tokens, new);
+	(*i) += j;
 }

@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/04 08:45:09 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/11 13:08:35 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/22 09:27:54 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 /**
  * @brief minshell struct
  * 
- * @param lexer struct for lexer
+ * @param 
  */
 typedef struct s_minishell {
-	t_lexer	*lexer;
+	const char	*cmd_line;
+	t_token		*tokens;
 }				t_minishell;
 
 // free_shell.c

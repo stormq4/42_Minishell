@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 10:31:57 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/11 12:29:00 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/22 13:46:56 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ t_token *token)
 	token->token_data[0] = red;
 	token->token_data[1] = 0;
 	if (red == red_in)
-		token->type = e_red_heredoc;
+		token->type = e_s_in;
 	else
-		token->type = e_red_out_append;
+		token->type = e_s_out;
 }
 
 /**
@@ -48,9 +48,9 @@ t_token *token)
 	token->token_data[1] = red;
 	token->token_data[2] = 0;
 	if (red == red_in)
-		token->type = e_red_in;
+		token->type = e_d_in;
 	else
-		token->type = e_red_out_trunc;
+		token->type = e_d_out;
 	(*i)++;
 }
 
@@ -61,16 +61,15 @@ t_token *token)
  * @param i index for loaction of cmd_line
  * @param red redirect < or >
  */
-void	categorize_redirects(t_lexer *lexer, size_t *i, t_character red)
+void	categorize_redirects(t_token **tokens, size_t *i, t_character red, \
+const char *cmd_line)
 {
-	t_token	*token;
+	t_token	*new;
 
-	token = lexer_lstnew();
-	token->token_id = lexer->token_nr;
-	lexer->token_nr++;
-	if ((t_character)lexer->cmd_line[*i + 1] == red)
-		double_redirect(i, red, token);
+	new = lexer_lstnew();
+	if ((t_character)cmd_line[*i + 1] == red)
+		double_redirect(i, red, new);
 	else
-		single_redirect(red, token);
-	lexer_lstadd_back(&lexer->tokens, token);
+		single_redirect(red, new);
+	lexer_lstadd_back(tokens, new);
 }

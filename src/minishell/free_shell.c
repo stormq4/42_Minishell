@@ -6,11 +6,10 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 14:35:11 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/09 16:23:09 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/22 10:30:47 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
 #include "minishell.h"
 
 /**
@@ -20,10 +19,5 @@
  */
 void	free_shell(t_minishell *shell)
 {
-	t_token	*token_lst;
-
-	token_lst = shell->lexer->tokens;
-	lexer_lstclear(&token_lst);
-	free(shell->lexer->cmd_line);
-	free(shell->lexer);
+	lexer_lstclear(&shell->tokens);
 }
