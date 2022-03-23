@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 09:55:03 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/22 11:18:10 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/23 10:48:07 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
  * @brief if a pipe (|) character is recognized then a pipe new token 
  * is created
  * 
- * @param lexer 
- * @param i this pointer index is incremented since it cuts a part of the 
- * string
+ * @param tokens is the token list
  */
 void	categorize_pipe(t_token **tokens)
 {

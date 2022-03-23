@@ -41,8 +41,7 @@ SRC_MAIN :=			$(addprefix $(DIR_SRC)/$(DIR_MAIN)/, $(MAIN))
 
 # Minishell directory with files
 DIR_MINISHELL :=	minishell
-MINISHELL := 		free_shell.c \
-					initialize_structs.c
+MINISHELL := 		free_shell.c 
 
 SRC_MINISHELL :=	$(addprefix $(DIR_SRC)/$(DIR_MINISHELL)/, $(MINISHELL))
 
@@ -99,7 +98,7 @@ sanitize : fclean
 	@$(MAKE) sanitize=1
 	@echo $(PURPLE)"Compiled with sanitize=address [OK]"
 
-test : fclean
+test : clean
 	@$(MAKE) -C $(UNIT_TEST) test
 
 $(LIBA) :

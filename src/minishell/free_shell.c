@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 14:35:11 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/22 10:30:47 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/23 11:06:46 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
  */
 void	free_shell(t_minishell *shell)
 {
+	free((void *)shell->cmd_line);
 	lexer_lstclear(&shell->tokens);
 }

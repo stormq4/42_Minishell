@@ -6,12 +6,19 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 16:09:50 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/22 15:32:23 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/23 11:13:03 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+/**
+ * @brief strdup's part of the string up to len
+ * 
+ * @param str input string
+ * @param len characters
+ * @return char* 
+ */
 char	*ft_strdup_len(const char *str, size_t len)
 {
 	size_t	i;

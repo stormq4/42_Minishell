@@ -6,12 +6,21 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 09:43:27 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/22 15:45:38 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/23 11:07:28 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
+/**
+ * @brief finds the minimum length in one of the special
+ * charachters given below
+ * 
+ * @param cmd_line prompted command line
+ * @param i incrementer of the string
+ * @return size_t smallest value of earliest special charachter
+ * int string
+ */
 static size_t find_min_char(const char *cmd_line, size_t *i)
 {
 	size_t	j_n[6];
@@ -31,8 +40,9 @@ static size_t find_min_char(const char *cmd_line, size_t *i)
  * @brief If a ascii character (except space ) is found the next space or
  * end of line a token is created and put into the token_dat
  * 
- * @param lexer struct 
+ * @param tokens list 
  * @param i this pointer index is increased since it cuts a part of the string
+ * @param cmd_line is the prompted commandline
  */
 void	find_next_word(t_token **tokens, size_t *i, const char *cmd_line)
 {
@@ -52,9 +62,10 @@ void	find_next_word(t_token **tokens, size_t *i, const char *cmd_line)
  * @brief This function finds the next quote pair and generates a token with
  * it. The full string is placed in the token_data.
  * 
- * @param lexer 
+ * @param tokens list
  * @param i this pointer index is increased since it cuts a part of the string
  * @param quote single quote or double quote
+ * @param cmd_line is the prompted commandline
  */
 void	find_next_quote(t_token **tokens, size_t *i, t_character quote, \
 const char *cmd_line)

@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 10:31:57 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/22 13:46:56 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/23 10:50:46 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /**
  * @brief adds a single redirect token to the token link list
  * 
- * @param i index for loaction of cmd_line
  * @param red redirect < or >
  * @param token lst
  */
@@ -57,9 +56,10 @@ t_token *token)
 /**
  * @brief adds a single or double redirect token to the token link list
  * 
- * @param lexer struct
- * @param i index for loaction of cmd_line
+ * @param tokens list
+ * @param i index for loaction of cmd_line in ASCI vlaue
  * @param red redirect < or >
+ * @param cmd_line is the prompted commandline
  */
 void	categorize_redirects(t_token **tokens, size_t *i, t_character red, \
 const char *cmd_line)

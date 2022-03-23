@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:26:39 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/22 15:20:55 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/23 11:07:52 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
  * words are generated. For redirects (< and >) redirects tokens are 
  * generated and for the pipes (|) as well.
  * 
- * @param lexer struct
+ * @param tokens list
  * @param i is incremented in the scope int thelexer() function
  * @param str_i is the charcter being in the cmd_line
+ * @param cmd_line prompted string from commandline
  */
 static void	categorize_cmd_line(t_token **tokens, size_t *i, char str_i, \
 const char *cmd_line)
@@ -48,8 +49,8 @@ const char *cmd_line)
  * a string from the commandline. Every charachter is parsed and 
  * passed to the categorize lexer function.
  * 
- * @param shell struct
- * @return *t_lexer filled lexer struct
+ * @param cmd_line string from the prompted command line
+ * @return *t_ltoken filled tokens from the cmd_line
  */
 t_token	*lexer(const char *cmd_line)
 {
