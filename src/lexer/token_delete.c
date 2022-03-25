@@ -6,14 +6,15 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 17:19:36 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/25 15:24:53 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/25 15:47:38 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
 /**
- * @brief deletes the tokens in the list
+ * @brief deletes the tokens in the list this function is called 
+ * and passed in ft_lstclear
  * 
  * @param ct content of the list
  */
