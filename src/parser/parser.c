@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstlast.c                                       :+:    :+:            */
+/*   parser.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/12/02 12:55:37 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/25 11:47:02 by sde-quai      ########   odam.nl         */
+/*   Created: 2022/03/25 09:50:25 by sde-quai      #+#    #+#                 */
+/*   Updated: 2022/03/25 09:53:26 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser.h"
 
-t_list	*ft_lstlast(t_list *lst)
+t_command	*parser(t_token **token_lst)
 {
-	if (!lst)
-		return (0);
-	while (lst)
-	{
-		if (!lst->next)
-			return (lst);
-		lst = lst->next;
-	}
-	return (lst);
+	t_command	*commands;
+
+	(void)token_lst;
+	return (commands);
 }

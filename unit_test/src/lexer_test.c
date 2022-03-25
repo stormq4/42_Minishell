@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/18 10:14:19 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/22 15:47:52 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/24 16:44:57 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,14 @@ static void test_15()
 	compare_tokens("\"", e_word);
 }
 
+static void	test_16()
+{
+	test_setup("\"echo\" $HOME>>");
+	compare_tokens("\"echo\"", e_word);
+	compare_tokens("$HOME", e_word);
+	compare_tokens(">>", e_d_out);
+}
+
 int	lexer_test(void)
 {
 	UNITY_BEGIN();
@@ -238,5 +246,6 @@ int	lexer_test(void)
 	RUN_TEST(test_13);
 	RUN_TEST(test_14);
 	RUN_TEST(test_15);
+	RUN_TEST(test_16);
 	return (UNITY_END());
 }

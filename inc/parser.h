@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstlast.c                                       :+:    :+:            */
+/*   parser.h                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/12/02 12:55:37 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/25 11:47:02 by sde-quai      ########   odam.nl         */
+/*   Created: 2022/03/25 09:27:36 by sde-quai      #+#    #+#                 */
+/*   Updated: 2022/03/25 10:28:33 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-t_list	*ft_lstlast(t_list *lst)
-{
-	if (!lst)
-		return (0);
-	while (lst)
-	{
-		if (!lst->next)
-			return (lst);
-		lst = lst->next;
-	}
-	return (lst);
-}
+# include "lexer.h"
+
+typedef struct s_exec {
+	const char *cmd;
+	const char **args;
+	struct s_exec	*next;
+}				t_exec;
+
+typedef struct s_command {
+	t_token				*input;
+	t_token				*output;
+	t_exec				*exec;
+	struct s_command	*next;
+}				t_command;
+
+t_command	*parser(t_token **token_lst);
+
+#endif

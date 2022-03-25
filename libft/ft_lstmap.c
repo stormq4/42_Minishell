@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/02 12:55:44 by sde-quai      #+#    #+#                 */
-/*   Updated: 2021/12/02 12:55:44 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/25 13:30:10 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		return (head);
 	while (lst)
 	{
-		new_lst = ft_lstnew(f(lst->content));
+		new_lst = ft_lstnew(f(lst->ct));
 		if (new_lst)
 			ft_lstadd_back(&head, new_lst);
 		else

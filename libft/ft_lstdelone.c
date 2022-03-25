@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/02 12:55:24 by sde-quai      #+#    #+#                 */
-/*   Updated: 2021/12/02 12:55:29 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/25 13:29:44 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	if (!lst)
 		return ;
-	del(lst->content);
+	del(lst->ct);
 	free (lst);
 }
