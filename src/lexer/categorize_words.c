@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 09:43:27 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/23 11:07:28 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/25 15:16:48 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,20 @@ static size_t find_min_char(const char *cmd_line, size_t *i)
  * @param i this pointer index is increased since it cuts a part of the string
  * @param cmd_line is the prompted commandline
  */
-void	find_next_word(t_token **tokens, size_t *i, const char *cmd_line)
+void	find_next_word(t_list **tokens, size_t *i, const char *cmd_line)
 {
 	size_t	j;
-	t_token	*new;
+	t_list	*new;
+	t_token	*token_ct;
 
-	new = lexer_lstnew();
+	token_ct = malloc(sizeof(t_token));
+	ft_check_malloc(token_ct);
 	j = find_min_char(cmd_line, i);
-	new->token_data = ft_strdup_len(&cmd_line[*i], j);	
-	ft_check_malloc(new->token_data);
-	new->type = e_word;
-	lexer_lstadd_back(tokens, new);
+	token_ct->token_data = ft_strdup_len(&cmd_line[*i], j);
+	ft_check_malloc(token_ct->token_data);
+	token_ct->type = e_word;
+	new = ft_lstnew(token_ct);
+	ft_lstadd_back(tokens, new);
 	(*i) += j - 1;
 }
 
@@ -67,16 +70,20 @@ void	find_next_word(t_token **tokens, size_t *i, const char *cmd_line)
  * @param quote single quote or double quote
  * @param cmd_line is the prompted commandline
  */
-void	find_next_quote(t_token **tokens, size_t *i, t_character quote, \
+void	find_next_quote(t_list **tokens, size_t *i, t_character quote, \
 const char *cmd_line)
 {
 	size_t	j;
-	t_token	*new;
+	t_list	*new;
+	t_token	*token_ct;
 
-	new = lexer_lstnew();
+	token_ct = malloc(sizeof(t_token));
+	ft_check_malloc(token_ct);
 	j = ft_strlen_c(&cmd_line[*i + 1], quote) + 1;
-	new->token_data = ft_strdup_len(&cmd_line[*i], j + 1);
-	new->type = e_word;
-	lexer_lstadd_back(tokens, new);
+	token_ct->token_data = ft_strdup_len(&cmd_line[*i], j + 1);
+	token_ct->type = e_word;
+	new = ft_lstnew(token_ct);
+	ft_check_malloc(new);
+	ft_lstadd_back(tokens, new);
 	(*i) += j;
 }

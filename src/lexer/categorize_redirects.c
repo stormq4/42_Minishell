@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 10:31:57 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/23 10:50:46 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/25 15:13:20 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,18 @@ t_token *token)
  * @param red redirect < or >
  * @param cmd_line is the prompted commandline
  */
-void	categorize_redirects(t_token **tokens, size_t *i, t_character red, \
+void	categorize_redirects(t_list **tokens, size_t *i, t_character red, \
 const char *cmd_line)
 {
-	t_token	*new;
+	t_token	*token_ct;
+	t_list	*new;
 
-	new = lexer_lstnew();
+	token_ct = malloc(sizeof(t_token));
+	ft_check_malloc(token_ct);
 	if ((t_character)cmd_line[*i + 1] == red)
-		double_redirect(i, red, new);
+		double_redirect(i, red, token_ct);
 	else
-		single_redirect(red, new);
-	lexer_lstadd_back(tokens, new);
+		single_redirect(red, token_ct);
+	new = ft_lstnew(token_ct);
+	ft_lstadd_back(tokens, new);
 }

@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/18 10:14:19 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/24 16:44:57 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/25 15:04:28 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
  * new input
  * @param begin global variable to assign beginning of the link list
  */
-t_token	*tokens;
-t_token *begin;
+t_list	*tokens;
+t_list	*begin;
 
 /**
  * @brief creates token from the lexer and puts cmd_line inside
@@ -44,6 +44,7 @@ static void	test_setup(const char *cmd_line)
 static void	compare_tokens(const char *test_string, t_token_type type)
 {
 	size_t	len;
+	t_token	*tok;
 
 	if (!tokens)
 	{
@@ -51,9 +52,10 @@ static void	compare_tokens(const char *test_string, t_token_type type)
 		TEST_ABORT();
 		return ;
 	}
-	TEST_ASSERT_EQUAL_INT16(type, tokens->type);
-	TEST_ASSERT_EQUAL_STRING(test_string, tokens->token_data);
-	len = ft_strlen(tokens->token_data);
+	tok = (t_token *)tokens->ct;
+	TEST_ASSERT_EQUAL_INT16(type, tok->type);
+	TEST_ASSERT_EQUAL_STRING(test_string, tok->token_data);
+	len = ft_strlen(tok->token_data);
 	TEST_ASSERT_EQUAL_UINT64(len, ft_strlen(test_string));
 	tokens = tokens->next;
 }
@@ -66,7 +68,7 @@ void	setUp(void)	{}
  */
 void	tearDown(void)
 {
-	lexer_lstclear(&begin);
+	ft_lstclear(&begin, token_delete);
 	tokens = NULL;
 	begin = NULL;
 }

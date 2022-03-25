@@ -49,9 +49,9 @@ SRC_MINISHELL :=	$(addprefix $(DIR_SRC)/$(DIR_MINISHELL)/, $(MINISHELL))
 # Lexer directory with files
 DIR_LEXER :=		lexer
 LEXER :=			lexer.c \
-					lexer_lst.c \
 					categorize_pipes.c \
 					categorize_redirects.c \
+					token_delete.c \
 					categorize_words.c
 
 SRC_LEXER :=		$(addprefix $(DIR_SRC)/$(DIR_LEXER)/, $(LEXER))
@@ -98,11 +98,11 @@ sanitize : fclean
 	@$(MAKE) sanitize=1
 	@echo $(PURPLE)"Compiled with sanitize=address [OK]"
 
-test : clean
+test : fclean
 	@$(MAKE) -C $(UNIT_TEST) test
 
 $(LIBA) :
-	@$(MAKE) -C $(LIBFT)
+	@$(MAKE) -C $(LIBFT) bonus
 
 $(NAME) : $(LIBA) $(OBJ)
 	@echo $(CYAN)"Object files created for MINISHELL [OK]"

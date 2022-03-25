@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 17:25:03 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/22 11:44:22 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/25 15:03:28 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef enum e_token_type {
 /**
  * @brief token struct in a link list
  * 
- * @param token_id starting from 0 in ascending order
  * @param token_data char * string of the partial cmd line
  * @param type enum for type of token
  * @param next points to the next s_token struct
@@ -39,41 +38,28 @@ typedef enum e_token_type {
 typedef struct s_token {
 	char			*token_data;
 	t_token_type	type;
-	struct s_token	*next;
+	// struct s_token	*next;
 }				t_token;
 
-// /**
-//  * @brief lexer struct which holds the data of the lexer
-//  * 
-//  * @param cmd_line line read from the command line
-//  * @param token_nr total number of tokens
-//  */
-// typedef struct s_lexer
-// {
-// 	char	*cmd_line;
-// 	size_t	token_nr;
-// 	t_token	*tokens;
-// }				t_lexer;
-
 // lexer.c
-// t_lexer	*lexer(t_lexer *lexer);
-t_token	*lexer(const char *cmd_line);
+t_list	*lexer(const char *cmd_line);
 
-// lexer_lst.c
-t_token	*lexer_lstnew(void);
-void	lexer_lstadd_back(t_token **lst, t_token *new);
-void	lexer_lstclear(t_token **lst);
+// // lexer_lst.c
+void	token_delete(void *ct);
+// t_token	*lexer_lstnew(void);
+// void	lexer_lstadd_back(t_token **lst, t_token *new);
+// void	lexer_lstclear(t_token **lst);
 
 // categorize_words.c
-void	find_next_quote(t_token **tokens, size_t *i, t_character quote, \
+void	find_next_quote(t_list **tokens, size_t *i, t_character quote, \
 const char *cmd_line);
-void	find_next_word(t_token **tokens, size_t *i, const char *cmd_line);
+void	find_next_word(t_list **tokens, size_t *i, const char *cmd_line);
 
 // categorize_pipes.c
-void	categorize_pipe(t_token **tokens);
+void	categorize_pipe(t_list **tokens);
 
 // categorize_redirects.c
-void	categorize_redirects(t_token **tokens, size_t *i, t_character red, \
+void	categorize_redirects(t_list **tokens, size_t *i, t_character red, \
 const char *cmd_line);
 
 #endif

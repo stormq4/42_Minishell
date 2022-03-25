@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   token_delete.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/04 08:45:09 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/25 14:07:48 by sde-quai      ########   odam.nl         */
+/*   Created: 2022/03/07 17:19:36 by sde-quai      #+#    #+#                 */
+/*   Updated: 2022/03/25 15:24:53 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-// header files in inc folder
-# include "lexer.h"
-# include "parser.h"
+#include "lexer.h"
 
 /**
- * @brief minshell struct
+ * @brief deletes the tokens in the list
  * 
- * @param 
+ * @param ct content of the list
  */
-typedef struct s_minishell {
-	const char	*cmd_line;
-	t_list		*tokens;
-}				t_minishell;
+void	token_delete(void *ct)
+{
+	t_token	*tok;
 
-// free_shell.c
-void	free_shell(t_minishell *shell);
-
-// initialize_sturcts.c
-void	initialize_structs(t_minishell *shell);
-
-#endif
+	tok = (t_token *)ct;
+	free(tok->token_data);
+	free(tok);
+}

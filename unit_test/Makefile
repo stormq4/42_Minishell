@@ -40,7 +40,7 @@ fclean :
 	@echo $(RED) "Deleting TESTER Executable [OK]"
 
 $(LIBA) :
-	@$(MAKE) -C $(LIBFT)
+	@$(MAKE) -C $(LIBFT) bonus
 
 $(OBJ_DIR)/%.o : ../%.c
 	@mkdir -p $(dir $@)

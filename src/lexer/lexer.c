@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:26:39 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/23 11:07:52 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/25 13:46:52 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
  * @param str_i is the charcter being in the cmd_line
  * @param cmd_line prompted string from commandline
  */
-static void	categorize_cmd_line(t_token **tokens, size_t *i, char str_i, \
+static void	categorize_cmd_line(t_list **tokens, size_t *i, char str_i, \
 const char *cmd_line)
 {
 	if (str_i == space)
@@ -52,9 +52,9 @@ const char *cmd_line)
  * @param cmd_line string from the prompted command line
  * @return *t_ltoken filled tokens from the cmd_line
  */
-t_token	*lexer(const char *cmd_line)
+t_list	*lexer(const char *cmd_line)
 {
-	t_token	*tokens;
+	t_list	*tokens;
 	size_t	i;
 	size_t	len;
 

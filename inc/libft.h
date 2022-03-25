@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/02 12:59:54 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/02/02 09:27:56 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/25 14:34:57 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_list
 {
-	void			*content;
+	void			*ct;
 	struct s_list	*next;
 }	t_list;
 
