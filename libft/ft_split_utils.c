@@ -6,11 +6,26 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/12 11:29:19 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/01/25 10:42:22 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/28 13:29:55 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/**
+ * @brief null terminates the last char * allocated in the 2d array with NULL
+ * 
+ * @param cmd1_2d 2d array
+ */
+void	ft_split_null_termininate(char **cmd1_2d)
+{
+	int	i;
+
+	i = 0;
+	while (cmd1_2d[i])
+		i++;
+	cmd1_2d[i] = NULL;
+}
 
 void	ft_split_free(char **split)
 {

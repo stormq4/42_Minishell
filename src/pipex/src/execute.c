@@ -6,26 +6,11 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/22 09:49:07 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/03 15:17:15 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/28 13:30:44 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-/**
- * @brief null terminates the last char * allocated in the 2d array with NULL
- * 
- * @param cmd1_2d 2d array
- */
-static void	ft_split_null_termininate(char **cmd1_2d)
-{
-	int	i;
-
-	i = 0;
-	while (cmd1_2d[i])
-		i++;
-	cmd1_2d[i] = NULL;
-}
 
 /**
  * @brief Checks for every command in the possible paths for the given

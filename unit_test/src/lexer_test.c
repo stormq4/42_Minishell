@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/18 10:14:19 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/25 15:04:28 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/28 16:36:51 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static void	test_setup(const char *cmd_line)
 {
 	tokens = lexer(cmd_line);
 	begin = tokens;
-	TEST_ASSERT_NOT_NULL(tokens);
+	if (cmd_line)
+		TEST_ASSERT_NOT_NULL(tokens);
 }
 
 /**

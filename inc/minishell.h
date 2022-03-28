@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/04 08:45:09 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/25 14:07:48 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/28 13:58:58 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 typedef struct s_minishell {
 	const char	*cmd_line;
 	t_list		*tokens;
+	t_list		*parser;
 }				t_minishell;
 
 // free_shell.c

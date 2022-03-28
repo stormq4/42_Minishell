@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/02 12:59:54 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/25 11:45:40 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/28 13:30:10 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ char			*ft_strdup_c(const char *s1, int c);
 float			absolute_float(float abs);
 int				absolute_int(int abs);
 long			absolute_long(long abs);
+void			ft_split_null_termininate(char **cmd1_2d);
 
 #endif

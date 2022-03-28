@@ -56,6 +56,12 @@ LEXER :=			lexer.c \
 
 SRC_LEXER :=		$(addprefix $(DIR_SRC)/$(DIR_LEXER)/, $(LEXER))
 
+# Parser directory with files
+DIR_PARSER :=		Parser
+PARSER :=			parser.c \
+					parser_delete.c
+
+SRC_PARSER :=		$(addprefix $(DIR_SRC)/$(DIR_PARSER)/, $(PARSER))
 
 # Utils directory with files
 DIR_UTILS :=		utils
@@ -67,9 +73,9 @@ SRC_UTILS :=		$(addprefix $(DIR_SRC)/$(DIR_UTILS)/, $(UTILS))
 
 
 # All Source Files in variable
-SRC :=				$(SRC_UTILS) $(SRC_LEXER) $(SRC_MINISHELL) $(SRC_MAIN)
+SRC :=				$(SRC_UTILS) $(SRC_LEXER) $(SRC_MINISHELL) $(SRC_MAIN) $(SRC_PARSER)
 
-export	SRC_TEST := $(SRC_UTILS) $(SRC_LEXER) $(SRC_MINISHELL)
+export	SRC_TEST := $(SRC_UTILS) $(SRC_LEXER) $(SRC_MINISHELL) $(SRC_PARSER)
 
 ## Object files from source files
 OBJ_DIR :=			obj
