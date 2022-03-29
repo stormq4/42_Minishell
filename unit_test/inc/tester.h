@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/18 10:14:40 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/25 14:19:58 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/29 13:30:47 by stormdequay   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 # include "minishell.h"
 
 int	lexer_test(void);
+int	parser_test(void);
 
 #endif

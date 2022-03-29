@@ -84,7 +84,7 @@ OBJ :=				$(OBJ_C:%.c=%.o)
 
 ## Colors
 export GREEN := 			"\033[1;32m"
-export CYAN := 			"\033[1;36m"
+export CYAN := 				"\033[1;36m"
 export RED := 				"\033[1;31m"
 export PURPLE := 			"\033[1;35m"
 
