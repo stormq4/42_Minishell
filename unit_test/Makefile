@@ -17,12 +17,13 @@ LIBA :=					../libft/libft.a
 ## SRCS FILES
 SRC :=					$(SRC_TEST) 
 SRC_UT :=				src/main.c \
-						src/lexer_test.c \
 						src/parser_test.c
+						
+# src/lexer_test.c 
 SRC_UNITC := 			unity/src/unity.c
 
 ## SANITIZE
-SANITIZE := -fsanitize=address
+SANITIZE := 			-fsanitize=address
 
 ## OBJECT FILES
 OBJ_DIR :=				../obj
