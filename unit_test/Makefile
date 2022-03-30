@@ -1,11 +1,10 @@
 # -*- Makefile -*-
 
 ## EXECUTABLE NAMES
-EXEC_DIR := tests
-
 F_NAME :=				lexer \
 						parser
 
+EXEC_DIR :=				tests
 NAME :=					$(addprefix $(EXEC_DIR)/, $(F_NAME))
 
 ## INCLUDES
