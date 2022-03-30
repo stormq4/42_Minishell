@@ -20,12 +20,11 @@ LIBFT :=				../libft
 LIBA :=					../libft/libft.a
 
 ## SRCS FILES
-SRC_UT :=				src/parser_test.c \
-						src/lexer_test.c
+_ := 					_test.c
+SRC_UT :=				$(addsuffix $(_), $(addprefix src/, $(F_NAME)))
 
 SRC_UNITC := 			unity/src/unity.c
 
-_ := 					_test.c
 
 ## SANITIZE
 SANITIZE := 			-fsanitize=address
