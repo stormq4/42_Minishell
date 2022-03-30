@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/25 08:45:45 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/29 13:33:55 by stormdequay   ########   odam.nl         */
+/*   Updated: 2022/03/30 11:57:40 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,38 @@ void	test_5()
 	compare_out(&cmd->out, "output", e_s_out);
 }
 
+void	test_6()
+{
+	test_setup("<< heredoc << new heredoc << hd << hd s << hds1");
+	cmd = (t_command *)commands->ct;
+	compare_exec(cmd->exec, "heredoc s");
+	compare_heredoc(&cmd->heredoc, "heredoc", e_d_in);
+	compare_heredoc(&cmd->heredoc, "new", e_d_in);
+	compare_heredoc(&cmd->heredoc, "hd", e_d_in);
+	compare_heredoc(&cmd->heredoc, "hds1", e_d_in);
+}
+
+void	test_7()
+{
+	test_setup("echo komaaan cat poepjes op je muil");
+	cmd = (t_command *)commands->ct;
+	compare_exec(cmd->exec, "echo komaaan cat poepjes op je muil");	
+}
+
+void	test_8()
+{
+	test_setup("< hallo<hallo1<     hallo2 echo       \"good morning sir\" > hoi >hoi1>hooi>>hoiq");
+	cmd = (t_command *)commands->ct;
+	compare_exec(cmd->exec,"echo \"good morning sir\"");	
+	compare_in(&cmd->in, "hallo", e_s_in);
+	compare_in(&cmd->in, "hallo1", e_s_in);
+	compare_in(&cmd->in, "hallo2", e_s_in);
+	compare_out(&cmd->out, "hoi", e_s_out);
+	compare_out(&cmd->out, "hoi1", e_s_out);
+	compare_out(&cmd->out, "hooi", e_s_out);
+	compare_out(&cmd->out, "hoiq", e_s_out);
+}
+
 int	parser_test(void)
 {
 	UNITY_BEGIN();
@@ -181,5 +213,17 @@ int	parser_test(void)
 	RUN_TEST(test_3);
 	RUN_TEST(test_4);
 	RUN_TEST(test_5);
+	RUN_TEST(test_6);
+	RUN_TEST(test_7);
+	RUN_TEST(test_8);
 	return (UNITY_END());
+}
+
+int main(void)
+{
+	int	nr_fails;
+
+	nr_fails = parser_test();
+	printf("#NR of failes in lexer -->: %d\n", nr_fails);
+	return (0);
 }

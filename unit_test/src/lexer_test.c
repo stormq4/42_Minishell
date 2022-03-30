@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/18 10:14:19 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/28 16:36:51 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/30 11:09:37 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,21 @@ static void	test_16()
 	compare_tokens(">>", e_d_out);
 }
 
+static void	test_17()
+{
+	test_setup("<hallo<hallo1<hallo2<hallo3>out");
+	compare_tokens("<", e_s_in);
+	compare_tokens("hallo", e_word);
+	compare_tokens("<", e_s_in);
+	compare_tokens("hallo1", e_word);
+	compare_tokens("<", e_s_in);
+	compare_tokens("hallo2", e_word);
+	compare_tokens("<", e_s_in);
+	compare_tokens("hallo3", e_word);
+	compare_tokens(">", e_s_out);
+	compare_tokens("out", e_word);
+}
+
 int	lexer_test(void)
 {
 	UNITY_BEGIN();
@@ -250,5 +265,15 @@ int	lexer_test(void)
 	RUN_TEST(test_14);
 	RUN_TEST(test_15);
 	RUN_TEST(test_16);
+	RUN_TEST(test_17);
 	return (UNITY_END());
+}
+
+int main(void)
+{
+	int	nr_fails;
+
+	nr_fails = lexer_test();
+	printf("#NR of failes in lexer -->: %d\n", nr_fails);
+	return (0);
 }

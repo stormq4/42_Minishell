@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/28 13:48:01 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/28 15:19:41 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/03/30 10:57:17 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	parser_delete(void *ct)
 	{
 		free((void *)command->exec->cmd);
 		ft_split_free(command->exec->args);
+		free(command->exec);
 	}
 	free(command);
 }

@@ -57,7 +57,7 @@ LEXER :=			lexer.c \
 SRC_LEXER :=		$(addprefix $(DIR_SRC)/$(DIR_LEXER)/, $(LEXER))
 
 # Parser directory with files
-DIR_PARSER :=		Parser
+DIR_PARSER :=		parser
 PARSER :=			parser.c \
 					parser_delete.c
 
