@@ -12,7 +12,8 @@ INC_UT := 				-I ../inc
 UNIT_INC := 			-I ./inc
 
 ## UNITY DEFINES
-UNITY_DEFINES 			:= -D UNITY_OUTPUT_COLOR
+UNITY_DEFINES 			:=
+#  -D UNITY_OUTPUT_COLOR
 
 ## LIBFT
 LIBFT :=				../libft
@@ -38,10 +39,14 @@ test : $(NAME)
 	@rm -rf $(EXEC_DIR)/lexer.dSYM $(EXEC_DIR)/parser.dSYM
 	@./run_test.sh
 
+all : $(NAME)
+	@mkdir -p $(dir $@)
+	@rm -rf $(EXEC_DIR)/lexer.dSYM $(EXEC_DIR)/parser.dSYM
+
 $(NAME) : $(LIBA) $(OBJ)
 
 fclean :
-	@rm -rf $(EXEC_DIR)
+	@rm -rf $(EXEC_DIR) results
 	@echo $(RED) "Deleting TESTER Executable [OK]"
 
 $(LIBA) :

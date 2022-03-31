@@ -104,7 +104,8 @@ sanitize : fclean
 	@$(MAKE) sanitize=1
 	@echo $(PURPLE)"Compiled with sanitize=address [OK]"
 
-test : fclean
+test : 
+	@rm -rf $(NAME)
 	@$(MAKE) -C $(UNIT_TEST) test
 
 $(LIBA) :
@@ -112,7 +113,7 @@ $(LIBA) :
 
 $(NAME) : $(LIBA) $(OBJ)
 	@echo $(CYAN)"Object files created for MINISHELL [OK]"
-	@$(CC) $(CFLAGS) $(OBJ) $(INC) $(LIBA) $(READLINE) -o $(NAME)
+	@$(CC) $(CFLAGS) $(INC) $(READLINE) $^ -o $(NAME)
 	@echo $(GREEN)"MINISHELL compiled [OK]"
 
 $(OBJ_DIR)/%.o : %.c
