@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstclear.c                                      :+:    :+:            */
+/*   find_paths.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: gpirro <gpirro@student.42.fr>                +#+                     */
+/*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/12/02 12:55:20 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/03 13:30:58 by gpirro        ########   odam.nl         */
+/*   Created: 2022/06/01 09:17:49 by sde-quai      #+#    #+#                 */
+/*   Updated: 2022/06/14 10:25:31 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "utils.h"
 
-int	ft_lstclear(t_list **lst, void (*del)(void *))
+char	*find_paths(char **env)
 {
-	t_list	*tmp;
-
-	if (!lst)
-		return (1);
-	while ((*lst))
-	{
-		tmp = *lst;
-		*lst = (*lst)->next;
-		ft_lstdelone(tmp, del);
-	}
-	*lst = NULL;
-	return (1);
+	while (ft_strncmp("PATH", *env, 4))
+		env++;
+	return (*env + 5);
 }

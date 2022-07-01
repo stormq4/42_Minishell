@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstclear.c                                      :+:    :+:            */
+/*   free_split.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: gpirro <gpirro@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/12/02 12:55:20 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/03 13:30:58 by gpirro        ########   odam.nl         */
+/*   Created: 2022/06/21 13:14:38 by gpirro        #+#    #+#                 */
+/*   Updated: 2022/06/28 13:42:51 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <expander.h>
 
-int	ft_lstclear(t_list **lst, void (*del)(void *))
+void	free_split(t_list **lstsplit)
 {
-	t_list	*tmp;
+	t_list		*split;
+	t_expand	*item;
+	t_list		*tmp;
 
-	if (!lst)
-		return (1);
-	while ((*lst))
+	split = *lstsplit;
+	while (split)
 	{
-		tmp = *lst;
-		*lst = (*lst)->next;
-		ft_lstdelone(tmp, del);
+		item = (t_expand *)split->ct;
+		free(item->split);
+		free(item);
+		tmp = split;
+		split = split->next;
+		free(tmp);
 	}
-	*lst = NULL;
-	return (1);
+	free(split);
 }

@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   parser.h                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
+/*   By: gpirro <gpirro@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/25 09:27:36 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/28 15:17:18 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/06/29 17:17:00 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,53 @@
 
 # include "lexer.h"
 
+/**
+ * @brief t_red struct
+ * 
+ * @param fd file descriptor
+ * @param type of token
+ * @param file filename
+ */
 typedef struct s_red {
 	int				fd;
 	t_token_type	type;
-	const char		*file;
+	char			*file;
 }				t_red;
 
+/**
+ * @brief t_exec struct
+ * 
+ * @param cmd command to be executed
+ * @param args containing the NULL terminated splitted arguments
+ */
 typedef struct s_exec {
-	const char	*cmd;
-	char		**args;
+	char	*cmd;
 }				t_exec;
 
+/**
+ * @brief t_command struct
+ * 
+ * @param in input redirects in a t_list
+ * @param out output redirects in a t_list
+ * @param t_exec struct 
+ */
 typedef struct s_command {
 	t_list	*in;
 	t_list	*out;
-	t_list	*heredoc;
 	t_exec	*exec;
 }				t_command;
 
+// parser.c
 t_list	*parser(t_list **token_lst);
 
+// parser_delete.c
 void	parser_delete(void *ct);
+
+// append_redirect.c
+void	append_redirect(t_list **token_lst, t_command *command, \
+t_token *token);
+
+// append_word.c
+void	append_word(t_list **token_lst, t_command *command, t_token *token);
 
 #endif

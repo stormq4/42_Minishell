@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   tester.h                                           :+:    :+:            */
+/*   adjust_location.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/18 10:14:40 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/31 11:11:23 by sde-quai      ########   odam.nl         */
+/*   Created: 2022/06/14 15:41:36 by sde-quai      #+#    #+#                 */
+/*   Updated: 2022/06/27 13:31:23 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TESTER_H
-# define TESTER_H
+#include "utils.h"
 
-# include "unity.h"
-# include "minishell.h"
+void	adjust_location(char **env)
+{
+	char	*location;
 
-#endif
+	while (ft_strncmp("_=", *env, 2))
+		env++;
+	location = *env;
+	free(location);
+	*env = ft_strjoin("_=", "./minishell");
+	ft_check_malloc(*env);
+}

@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 14:35:11 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/28 14:00:07 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/06/29 17:29:06 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,23 @@
  */
 void	free_shell(t_minishell *shell)
 {
-	free((void *)shell->cmd_line);
-	ft_lstclear(&shell->tokens, token_delete);
-	ft_lstclear(&shell->parser, parser_delete);
+	if (shell->cmd_line)
+		free((void *)shell->cmd_line);
+	if (shell->b_tokens)
+		ft_lstclear(&shell->b_tokens, token_delete);
+	if (shell->b_parser)
+		ft_lstclear(&shell->b_parser, parser_delete);
+}
+
+void	free_env(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		free(env[i]);
+		i++;
+	}
+	free(env);
 }

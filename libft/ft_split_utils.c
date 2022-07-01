@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/12 11:29:19 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/28 13:29:55 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/06/30 09:53:54 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_split_free(char **split)
 {
 	size_t	i;
 
+	if (!split)
+		return ;
 	i = 0;
 	while (split[i])
 	{

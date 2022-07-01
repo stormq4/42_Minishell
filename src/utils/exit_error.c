@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstclear.c                                      :+:    :+:            */
+/*   exit_error.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: gpirro <gpirro@student.42.fr>                +#+                     */
+/*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/12/02 12:55:20 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/03 13:30:58 by gpirro        ########   odam.nl         */
+/*   Created: 2022/06/01 08:49:37 by sde-quai      #+#    #+#                 */
+/*   Updated: 2022/06/10 15:11:08 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "utils.h"
 
-int	ft_lstclear(t_list **lst, void (*del)(void *))
+void	exit_error_message(char	*message)
 {
-	t_list	*tmp;
-
-	if (!lst)
-		return (1);
-	while ((*lst))
-	{
-		tmp = *lst;
-		*lst = (*lst)->next;
-		ft_lstdelone(tmp, del);
-	}
-	*lst = NULL;
-	return (1);
+	ft_putstr_fd("minishell: ", 2);
+	perror(message);
+	g_error = errno;
+	exit(errno);
 }

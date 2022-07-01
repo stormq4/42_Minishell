@@ -6,7 +6,7 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 10:31:57 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/25 15:13:20 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/05/20 10:57:00 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ const char *cmd_line)
 		double_redirect(i, red, token_ct);
 	else
 		single_redirect(red, token_ct);
+	(*i)++;
 	new = ft_lstnew(token_ct);
 	ft_lstadd_back(tokens, new);
 }

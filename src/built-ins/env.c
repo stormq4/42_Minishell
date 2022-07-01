@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstdelone.c                                     :+:    :+:            */
+/*   env.c                                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/12/02 12:55:24 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/09 14:20:25 by sde-quai      ########   odam.nl         */
+/*   Created: 2022/06/16 19:11:03 by sde-quai      #+#    #+#                 */
+/*   Updated: 2022/06/21 09:35:11 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "builtins.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+t_bool	mini_env(char **env, char *cmd)
 {
-	if (!lst)
-		return ;
-	del(lst->ct);
-	free (lst);
+	if (*cmd)
+	{
+		ft_putstr_fd("minishell: env: too many arguments\n", 2);
+		g_error = 1;
+		exit(g_error);
+	}
+	while (*env)
+	{
+		ft_putendl_fd(*env, 1);
+		env++;
+	}
+	g_error = 0;
+	exit(g_error);
+	return (true);
 }

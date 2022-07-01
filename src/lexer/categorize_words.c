@@ -6,84 +6,84 @@
 /*   By: stormdequay <stormdequay@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 09:43:27 by stormdequay   #+#    #+#                 */
-/*   Updated: 2022/03/25 15:16:48 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/06/28 17:19:15 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
 /**
- * @brief finds the minimum length in one of the special
- * charachters given below
+ * @brief appends a string to token_data
  * 
- * @param cmd_line prompted command line
- * @param i incrementer of the string
- * @return size_t smallest value of earliest special charachter
- * int string
+ * @param token
+ * @param tmp_str
  */
-static size_t find_min_char(const char *cmd_line, size_t *i)
+static void	join_token_data(t_token *token, char *tmp_str)
 {
-	size_t	j_n[6];
-	size_t	j;
+	char	*free_str;
 
-	j_n[0] = ft_strlen_c(&cmd_line[*i], space);
-	j_n[1] = ft_strlen_c(&cmd_line[*i], s_quote);
-	j_n[2] = ft_strlen_c(&cmd_line[*i], d_quote);
-	j_n[3] = ft_strlen_c(&cmd_line[*i], red_in);
-	j_n[4] = ft_strlen_c(&cmd_line[*i], red_out);
-	j_n[5] = ft_strlen_c(&cmd_line[*i], c_pipe);
-	j = find_min_size_t(j_n, 6);
-	return (j);
+	if (token->token_data)
+	{
+		free_str = token->token_data;
+		token->token_data = ft_strjoin(free_str, tmp_str);
+		ft_check_malloc(token->token_data);
+		free(free_str);
+		free(tmp_str);
+	}
+	else
+		token->token_data = tmp_str;
 }
 
 /**
- * @brief If a ascii character (except space ) is found the next space or
- * end of line a token is created and put into the token_dat
+ * @brief finds the end of the word with quotes or not
  * 
- * @param tokens list 
- * @param i this pointer index is increased since it cuts a part of the string
- * @param cmd_line is the prompted commandline
+ * @param i 
+ * @param cmd_line 
+ * @param token 
  */
-void	find_next_word(t_list **tokens, size_t *i, const char *cmd_line)
+static void	find_end_word(size_t *i, const char *cmd_line, t_token *token)
 {
 	size_t	j;
-	t_list	*new;
-	t_token	*token_ct;
+	char	*tmp_str;
 
-	token_ct = malloc(sizeof(t_token));
-	ft_check_malloc(token_ct);
-	j = find_min_char(cmd_line, i);
-	token_ct->token_data = ft_strdup_len(&cmd_line[*i], j);
-	ft_check_malloc(token_ct->token_data);
-	token_ct->type = e_word;
-	new = ft_lstnew(token_ct);
-	ft_lstadd_back(tokens, new);
-	(*i) += j - 1;
+	if (cmd_line[*i] != s_quote && cmd_line[*i] != d_quote)
+	{
+		j = find_min_char(cmd_line, i);
+		tmp_str = ft_strdup_len(&cmd_line[*i], j);
+		ft_check_malloc(tmp_str);
+		(*i) += j - 1;
+	}
+	else
+	{
+		j = ft_strlen_c(&cmd_line[*i + 1], cmd_line[*i]) + 1;
+		tmp_str = ft_strdup_len(&cmd_line[*i], j + 1);
+		(*i) += j;
+	}
+	join_token_data(token, tmp_str);
 }
 
 /**
- * @brief This function finds the next quote pair and generates a token with
- * it. The full string is placed in the token_data.
+ * @brief finds the full next word in the commandline
  * 
- * @param tokens list
- * @param i this pointer index is increased since it cuts a part of the string
- * @param quote single quote or double quote
- * @param cmd_line is the prompted commandline
+ * @param token_lst 
+ * @param i 
+ * @param cmd_line 
  */
-void	find_next_quote(t_list **tokens, size_t *i, t_character quote, \
-const char *cmd_line)
+void	find_next_word(t_list **token_lst, size_t *i, const char *cmd_line)
 {
-	size_t	j;
+	t_token	*token;
 	t_list	*new;
-	t_token	*token_ct;
 
-	token_ct = malloc(sizeof(t_token));
-	ft_check_malloc(token_ct);
-	j = ft_strlen_c(&cmd_line[*i + 1], quote) + 1;
-	token_ct->token_data = ft_strdup_len(&cmd_line[*i], j + 1);
-	token_ct->type = e_word;
-	new = ft_lstnew(token_ct);
+	token = malloc(sizeof(t_token));
+	ft_check_malloc(token);
+	token->type = e_word;
+	token->token_data = NULL;
+	while (check_char_for_word(cmd_line[*i]))
+	{
+		find_end_word(i, cmd_line, token);
+		(*i)++;
+	}
+	new = ft_lstnew(token);
 	ft_check_malloc(new);
-	ft_lstadd_back(tokens, new);
-	(*i) += j;
+	ft_lstadd_back(token_lst, new);
 }

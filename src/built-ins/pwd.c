@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gianlucapirro <gianlucapirro@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/02 12:55:13 by sde-quai          #+#    #+#             */
-/*   Updated: 2022/06/10 14:50:05 by gianlucapir      ###   ########.fr       */
+/*   Created: 2022/06/14 10:28:15 by gianlucapir       #+#    #+#             */
+/*   Updated: 2022/06/24 11:47:14 by gianlucapir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <builtins.h>
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+t_bool	mini_pwd(void)
 {
-	t_list	*tmp;
+	char	pwd[PATH_MAX];
 
-	if (*lst)
-	{
-		tmp = ft_lstlast(*lst);
-		tmp->next = new;
-	}
+	if (getcwd(pwd, PATH_MAX))
+		ft_putendl_fd(pwd, 1);
 	else
-		*lst = new;
+		exit_error_message("");
+	g_error = 0;
+	exit(g_error);
+	return (true);
 }

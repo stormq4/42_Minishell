@@ -6,47 +6,83 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/25 09:50:25 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/30 09:39:58 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/06/29 17:17:20 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 /**
- * @brief 
- * dikke bullshit functie. Dit is alleen om de tester te kunnen compilen.
+ * @brief appends a redirect or word from the token list
  * 
- * je moet alle attributen malloccen en vullen zodat je geen undifined 
- * behavior en seg(x)-faults krijgt.
+ */
+void	add_token_2_command(t_token *token, t_command *command, \
+t_list **token_lst)
+{
+	if (token->type == e_word)
+		append_word(token_lst, command, token);
+	else
+		append_redirect(token_lst, command, token);
+}
+
+/**
+ * @brief creates a new command structs and fills it with input ouput
+ * and executable structs
+ * 
+ * @return t_command* 
+ */
+static t_command	*new_command(void)
+{
+	t_command	*command;
+	t_red		*in;
+	t_red		*out;
+
+	command = malloc(sizeof(t_command));
+	ft_check_malloc(command);
+	command->exec = malloc(sizeof(t_exec));
+	ft_check_malloc(command->exec);
+	command->exec->cmd = NULL;
+	in = malloc(sizeof(t_red));
+	ft_check_malloc(in);
+	in->file = NULL;
+	command->in = ft_lstnew(in);
+	out = malloc(sizeof(t_red));
+	ft_check_malloc(out);
+	out->file = NULL;
+	command->out = ft_lstnew(out);
+	return (command);
+}
+
+/**
+ * @brief The parser creates the structure of the commands between the pipes.
+ * The redirects are combined with words and the rest of the words combined 
+ * an excecutable. If a pipe is found a new command is added to the list.
+ * 
+ * @param token_lst 
+ * @return t_list* of commands i returned
  */
 t_list	*parser(t_list **token_lst)
 {
-	t_list		*commands;
-	t_command	*cmd;
-	t_red		*in;
-	t_red		*out;
-	t_red		*heredoc;
-	
-	cmd = malloc(sizeof(t_command));
-	cmd->exec = malloc(sizeof(t_exec));
-	cmd->exec->args = ft_split("hallo ik ben dom", ' ');
-	cmd->exec->cmd = ft_strdup("hallo ik ben dom");
-	commands = ft_lstnew(cmd);
-	in = malloc(sizeof(t_red));
-	in->fd = -1;
-	in->type = 10000;
-	in->file = ft_strdup("hallo");
-	out = malloc(sizeof(t_red));
-	out->file = ft_strdup("hallo");
-	out->fd = -1;
-	out->type = 10000;
-	heredoc = malloc(sizeof(t_red));
-	heredoc->file = ft_strdup("hallo");
-	out->fd = -1;
-	out->type = 10000;
-	cmd->heredoc = ft_lstnew(heredoc);
-	cmd->in = ft_lstnew(in);
-	cmd->out = ft_lstnew(out);
-	(void)token_lst;
-	return (commands);
+	t_list		*cmd_lst;
+	t_list		*begin_cml;
+	t_command	*command;
+	t_token		*token;
+
+	command = new_command();
+	cmd_lst = ft_lstnew(command);
+	begin_cml = cmd_lst;
+	while (*token_lst)
+	{
+		token = (t_token *)(*token_lst)->ct;
+		if (token->type != e_pipe)
+			add_token_2_command(token, command, token_lst);
+		else
+		{
+			cmd_lst->next = ft_lstnew(new_command());
+			cmd_lst = cmd_lst->next;
+			command = (t_command *)cmd_lst->ct;
+			*token_lst = (*token_lst)->next;
+		}
+	}
+	return (begin_cml);
 }

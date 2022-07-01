@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 17:19:36 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/25 15:47:38 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/06/09 11:27:27 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	token_delete(void *ct)
 	t_token	*tok;
 
 	tok = (t_token *)ct;
-	free(tok->token_data);
+	if (!tok)
+		return ;
+	if (tok->token_data)
+		free(tok->token_data);
 	free(tok);
 }

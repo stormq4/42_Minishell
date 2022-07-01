@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/02 12:56:46 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/09 10:29:04 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/05/11 11:09:04 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	*ft_strdup(const char *s1)
 
 	i = 0;
 	s2 = malloc(ft_strlen(s1) + 1);
+	ft_check_malloc(s2);
 	if (!s2)
 		return (0);
 	while (s1[i] != '\0')

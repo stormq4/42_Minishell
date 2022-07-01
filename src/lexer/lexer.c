@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:26:39 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/25 13:46:52 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/05/26 17:02:04 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,22 @@ static void	categorize_cmd_line(t_list **tokens, size_t *i, char str_i, \
 const char *cmd_line)
 {
 	if (str_i == space)
+	{
+		(*i)++;
 		return ;
-	else if (str_i == s_quote)
-		find_next_quote(tokens, i, s_quote, cmd_line);
-	else if (str_i == d_quote)
-		find_next_quote(tokens, i, d_quote, cmd_line);
+	}
+	else if (ft_isascii(str_i) && str_i != red_in && str_i != red_out && \
+	str_i != c_pipe)
+		find_next_word(tokens, i, cmd_line);
 	else if (str_i == c_pipe)
+	{
 		categorize_pipe(tokens);
+		(*i)++;
+	}
 	else if (str_i == red_in)
 		categorize_redirects(tokens, i, red_in, cmd_line);
 	else if (str_i == red_out)
 		categorize_redirects(tokens, i, red_out, cmd_line);
-	else if (ft_isascii(str_i))
-		find_next_word(tokens, i, cmd_line); //quotes and redirects as well
 }
 
 /**
@@ -62,9 +65,6 @@ t_list	*lexer(const char *cmd_line)
 	len = ft_strlen(cmd_line);
 	i = 0;
 	while (i < len)
-	{
 		categorize_cmd_line(&tokens, &i, cmd_line[i], cmd_line);
-		i++;
-	}
 	return (tokens);
 }

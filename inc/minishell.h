@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   minishell.h                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
+/*   By: gianlucapirro <gianlucapirro@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/04 08:45:09 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/03/28 13:58:58 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/06/22 10:39:29 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINISHELL_H
 
 // header files in inc folder
-# include "lexer.h"
-# include "parser.h"
+# include "executor.h"
+# include "expander.h"
 
 /**
  * @brief minshell struct
@@ -23,15 +23,15 @@
  * @param 
  */
 typedef struct s_minishell {
-	const char	*cmd_line;
+	char		*cmd_line;
 	t_list		*tokens;
+	t_list		*b_tokens;
 	t_list		*parser;
+	t_list		*b_parser;
 }				t_minishell;
 
 // free_shell.c
 void	free_shell(t_minishell *shell);
-
-// initialize_sturcts.c
-void	initialize_structs(t_minishell *shell);
+void	free_env(char **env);
 
 #endif

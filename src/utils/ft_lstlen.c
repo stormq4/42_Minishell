@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstclear.c                                      :+:    :+:            */
+/*   ft_lstlen.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: gpirro <gpirro@student.42.fr>                +#+                     */
+/*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/12/02 12:55:20 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/03 13:30:58 by gpirro        ########   odam.nl         */
+/*   Created: 2022/05/31 09:28:03 by sde-quai      #+#    #+#                 */
+/*   Updated: 2022/05/31 15:36:27 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "utils.h"
 
-int	ft_lstclear(t_list **lst, void (*del)(void *))
+int	ft_lstlen(t_list *lst)
 {
-	t_list	*tmp;
+	int	i;
 
-	if (!lst)
-		return (1);
-	while ((*lst))
+	i = 0;
+	while (lst)
 	{
-		tmp = *lst;
-		*lst = (*lst)->next;
-		ft_lstdelone(tmp, del);
+		i++;
+		lst = lst->next;
 	}
-	*lst = NULL;
-	return (1);
+	return (i);
 }
