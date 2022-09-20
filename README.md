@@ -2,37 +2,51 @@
 Writing our own Shell that behaves like bash
 
 ## Compiling & running the shell
-Make sure you install the readline library using brew:
+Make sure you install the readline library using brew: 
 ```
 brew install readline
 ```
 <br />
-Clone the repository and enter directory in you comand line:
+
+Clone the repository and enter directory in you comand line: 
 ```
 git clone https://github.com/stormq4/42_Minishell.git
 cd 42_Minishell
 ```
 <br />
-To compile the program run:
+
+To compile the program run: 
 ```
 make
 ```
 <br />
-To re compile the program run:
+
+To re compile the program run: 
 ```
 make re
 ```
 <br />
+
 To run the **unit tester** run:
 ```
 make utest
 ```
 <br />
+
 To run the **integration test** run:
+
 ```
 make itest
 ```
 <br />
+
+For cleaning use:
+
+```
+make fclean
+```
+<br />
+
 Finally run the following command to have fun with minishell executable:
 ```
 ./minishell
