@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/10 16:14:05 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/13 09:50:08 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/09/15 14:25:38 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * 
  * @param next_token 
  */
-static void	check_redirect_pair(t_token *next_token)
+static t_bool	check_redirect_pair(t_token *next_token)
 {
 	char	*error_str;
 
@@ -26,13 +26,12 @@ static void	check_redirect_pair(t_token *next_token)
 		error_str = ft_strjoin("minishell: syntax error near \
 unexpected token `", next_token->token_data);
 		ft_check_malloc(error_str);
-		free(next_token->token_data);
-		next_token->token_data = ft_strjoin(error_str, "'\n");
-		ft_check_malloc(next_token->token_data);
-		free(error_str);
 		g_error = 258;
-		ft_putstr_fd(next_token->token_data, 2);
+		ft_putendl_fd(error_str, 2);
+		free(error_str);
+		return (false);
 	}
+	return (true);
 }
 
 /**
@@ -43,14 +42,15 @@ unexpected token `", next_token->token_data);
  * @param token t_token
  * @param append_lst t_list
  */
-static void	check_first_append(t_red *red, t_list **token_lst, \
+static t_bool	check_first_append(t_red *red, t_list **token_lst, \
 t_token *token, t_list *append_lst)
 {
 	t_list	*new;
 	t_token	*next_token;
 
 	next_token = (t_token *)(*token_lst)->ct;
-	check_redirect_pair(next_token);
+	if (!check_redirect_pair(next_token))
+		return (false);
 	if (!red->file)
 	{
 		red->file = ft_strdup(next_token->token_data);
@@ -65,6 +65,7 @@ t_token *token, t_list *append_lst)
 		new = ft_lstnew(red);
 		ft_lstadd_back(&append_lst, new);
 	}
+	return (true);
 }
 
 /**
@@ -75,7 +76,7 @@ t_token *token, t_list *append_lst)
  * @param append t_list
  * @param token t_token
  */
-static void	append_redirect_token(t_list **token_lst, t_list **append, \
+static t_bool	append_redirect_token(t_list **token_lst, t_list **append, \
 t_token *token)
 {
 	t_red	*red;
@@ -88,7 +89,8 @@ t_token *token)
 	if ((*token_lst)->next)
 	{
 		*token_lst = (*token_lst)->next;
-		check_first_append(red, token_lst, token, append_lst);
+		if (!check_first_append(red, token_lst, token, append_lst))
+			return (false);
 		if (*token_lst)
 			*token_lst = (*token_lst)->next;
 	}
@@ -97,8 +99,10 @@ t_token *token)
 		(*token_lst) = (*token_lst)->next;
 		g_error = 258;
 		ft_putstr_fd("minishell: syntax error near unexpectd token \
-		`newline'\n", 2);
+`newline'\n", 2);
+		return (false);
 	}
+	return (true);
 }
 
 /**
@@ -109,11 +113,18 @@ t_token *token)
  * @param command t_command
  * @param token t_token
  */
-void	append_redirect(t_list **token_lst, t_command *command, \
+t_bool	append_redirect(t_list **token_lst, t_command *command, \
 t_token *token)
 {
 	if (token->type == e_s_in || token->type == e_d_in)
-		append_redirect_token(token_lst, &command->in, token);
+	{
+		if (!append_redirect_token(token_lst, &command->in, token))
+			return (false);
+	}
 	else if (token->type == e_s_out || token->type == e_d_out)
-		append_redirect_token(token_lst, &command->out, token);
+	{
+		if (!append_redirect_token(token_lst, &command->out, token))
+			return (false);
+	}
+	return (true);
 }

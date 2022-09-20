@@ -1,0 +1,2 @@
+echo "'$HOME'" > lala.txt | rm lala.txt 
+leaks minishell | grep leaked 

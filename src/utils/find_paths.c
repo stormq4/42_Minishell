@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/01 09:17:49 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/14 10:25:31 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/09/14 11:54:52 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 char	*find_paths(char **env)
 {
-	while (ft_strncmp("PATH", *env, 4))
+	while (*env && ft_strncmp("PATH", *env, 4))
 		env++;
-	return (*env + 5);
+	if (*env)
+		return (*env + 5);
+	return (NULL);
 }

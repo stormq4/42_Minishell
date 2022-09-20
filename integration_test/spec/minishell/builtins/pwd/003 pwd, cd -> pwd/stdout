@@ -1,0 +1,2 @@
+expected_to be_equal "/Users/$USER"
+expected_to exit_with_status "0"

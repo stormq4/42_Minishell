@@ -1,0 +1,2 @@
+echo 99$LESS/random  > lala.txt | rm lala.txt 
+leaks minishell | grep leaked 

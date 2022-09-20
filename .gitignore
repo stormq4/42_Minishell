@@ -3,4 +3,9 @@
 *.out
 *.o
 *.a
-minishell
+obj/*
+.DS_store
+unit_test/tests/*
+unit_test/results/*
+tmp/
+/minishell

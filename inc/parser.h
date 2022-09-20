@@ -6,7 +6,7 @@
 /*   By: gpirro <gpirro@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/25 09:27:36 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/29 17:17:00 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/09/15 14:27:05 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ typedef struct s_command {
 }				t_command;
 
 // parser.c
-t_list	*parser(t_list **token_lst);
+t_bool	parser(t_list **token_lst, t_list **b_lst);
 
 // parser_delete.c
 void	parser_delete(void *ct);
 
 // append_redirect.c
-void	append_redirect(t_list **token_lst, t_command *command, \
+t_bool	append_redirect(t_list **token_lst, t_command *command, \
 t_token *token);
 
 // append_word.c

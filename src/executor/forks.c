@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/20 17:02:36 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/20 17:02:37 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/07/01 14:34:11 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	remove_fork_list(t_list **fork_lst)
 	forks = *fork_lst;
 	while (forks)
 	{
-		free(forks->ct);
 		tmp = forks;
 		wait_for_fork(*(pid_t *)(tmp->ct));
+		free(forks->ct);
 		forks = forks->next;
 		free(tmp);
 	}

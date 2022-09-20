@@ -1,0 +1,2 @@
+echo Hello_world | cat -e > lala.txt | rm lala.txt
+leaks minishell | grep "leaked"

@@ -1,0 +1,2 @@
+cd asdfasdfasf
+leaks minishell | grep leaked

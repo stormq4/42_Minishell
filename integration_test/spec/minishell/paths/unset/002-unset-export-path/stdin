@@ -1,0 +1,3 @@
+unset PATH
+export PATH=/Users/sde-quai/.brew/bin:/Users/sde-quai/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/sde-quai/.brew/bin
+ls -la

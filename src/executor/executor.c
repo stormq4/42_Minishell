@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/16 11:11:25 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/30 09:56:11 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/09/19 17:04:42 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,11 @@ static void	set_up_pipe(t_pipex *p, t_list *cmd_lst, char ***envp)
 static void	single_command(t_command *command, t_pipex *p, char ***envp)
 {
 	pid_t	fork_pid;
+	t_bool	cmd_check;
 
-	if (single_cmd_builtins(command->exec->cmd, envp))
-		return ;
+	cmd_check = false;
+	if (command->exec->cmd && single_cmd_builtins_check(command->exec->cmd))
+		cmd_check = true;
 	fork_pid = fork();
 	if (fork_pid < 0)
 		exit_error_message("");
@@ -119,11 +121,15 @@ static void	single_command(t_command *command, t_pipex *p, char ***envp)
 		signal(SIGINT, signal_ctrl_heredoc);
 		find_last_input_fd(&command->in, STDIN_FILENO);
 		find_last_output_fd(&command->out, STDOUT_FILENO);
+		if (cmd_check)
+			exit(g_error);
 		signal(SIGINT, signal_ctrl_c);
 		if (!all_builtins(command->exec->cmd, envp))
 			execute_execve(command->exec->cmd, p);
 	}
 	wait_for_fork(fork_pid);
+	if (command->exec->cmd)
+		single_cmd_builtins(command->exec->cmd, envp);
 }
 
 /**
@@ -137,11 +143,15 @@ void	executor(t_list **cmd_lst, char ***envp)
 {
 	t_pipex		p;
 	t_command	*command;
+	char		*paths;
 
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, signal_quit);
-	p.paths_2d = ft_split(find_paths(*envp), ':');
-	ft_check_malloc(p.paths_2d);
+	paths = find_paths(*envp);
+	if (paths)
+		p.paths_2d = ft_split(paths, ':');
+	else
+		p.paths_2d = NULL;
 	p.envp = envp;
 	p.fork_lst = NULL;
 	p.cmd_count = 0;
@@ -151,6 +161,7 @@ void	executor(t_list **cmd_lst, char ***envp)
 		single_command(command, &p, envp);
 	else
 		set_up_pipe(&p, *cmd_lst, envp);
-	ft_split_free(p.paths_2d);
+	if (p.paths_2d)
+		ft_split_free(p.paths_2d);
 	signal(SIGINT, signal_ctrl_c);
 }

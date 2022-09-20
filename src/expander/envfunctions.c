@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   envfunctions.c                                     :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gianlucapirro <gianlucapirro@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/05/17 11:50:25 by gpirro        #+#    #+#                 */
-/*   Updated: 2022/06/28 13:45:49 by sde-quai      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   envfunctions.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gianlucapirro <gianlucapirro@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/17 11:50:25 by gpirro            #+#    #+#             */
+/*   Updated: 2022/09/17 10:07:21 by gianlucapir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,29 @@ char	*replace_env_var(char *str, char **envp)
 	return (replacer);
 }
 
+t_bool	check_special_expand(char a)
+{
+	if (a == 35)
+		return (true);
+	else if (a >= 42 && a <= 47)
+		return (true);
+	else if (a == 58)
+		return (true);
+	else if (a == 61)
+		return (true);
+	else if (a >= 63 && a <= 64)
+		return (true);
+	else if (a == 91)
+		return (true);
+	else if (a >= 93 && a <= 95)
+		return (true);
+	else if (a == 123)
+		return (true);
+	else if (a >= 125 && a <= 126)
+		return (true);
+	return (false);
+}
+
 /**
  * @brief free's old
  * 
@@ -63,10 +86,17 @@ int	replace_env_var_in_lst(t_list **split, char **envp)
 		expand = (t_expand *)(*split)->ct;
 		if (expand->expand == 1)
 		{
-			if (env_in_str(expand->split, envp))
+			if (env_in_str(expand->split, envp) && \
+			!has_special_expand_char(expand->split))
 			{
 				tmp = expand->split;
 				expand->split = replace_env_var(expand->split, envp);
+				free(tmp);
+			}
+			else if (env_in_special(expand->split, envp))
+			{
+				tmp = expand->split;
+				expand->split = replace_special_var(expand->split, envp);
 				free(tmp);
 			}
 		}

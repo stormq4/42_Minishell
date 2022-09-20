@@ -1,0 +1,2 @@
+ls | ls | ls | ls | cat -e > lala.txt | rm lala.txt
+leaks minishell | grep "leaked"

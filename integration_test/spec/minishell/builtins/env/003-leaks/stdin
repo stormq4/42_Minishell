@@ -1,0 +1,3 @@
+unset LESS SHELL
+env > lala.txt | rm lala.txt
+leaks minishell | grep "leaked" 

@@ -6,7 +6,7 @@
 /*   By: gianlucapirro <gianlucapirro@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 19:38:25 by gianlucapir   #+#    #+#                 */
-/*   Updated: 2022/07/01 13:24:48 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/09/20 11:15:35 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 t_bool	all_builtins(char *cmd, char ***envp);
 t_bool	check_clean_builtin(char *str, int size);
 t_bool	single_cmd_builtins(char *cmd, char ***envp);
+t_bool	single_cmd_builtins_check(char *cmd);
 
 // pwd.c
 t_bool	mini_pwd(void);
@@ -39,18 +40,15 @@ t_bool	mini_unset(char *cmdline, char ***env);
 t_bool	mult_unset(char *cmd_line, char ***env);
 int		unset_var(char *var, char ***env);
 
-// cd_utils.c
+// cd.c
 t_bool	mult_cd(char *cmd, char ***envp);
 t_bool	mini_cd(char *cmd, char ***envp);
-t_bool	check_backslash(char *cmd);
-char	*trim_backslash(char *trim);
-char	*return_trimmed_cmd(char *cmd);
-char	*plain_cd(void);
-char	*relative_cd(char *cmd);
 
 // export.c
 t_bool	mini_export(char *cmdline, char ***env);
 t_bool	mult_export(char *cmdline, char ***env);
+
+// exportutils.c
 void	free_split_arr(char **split);
 int		is_valid_identifier(char *s);
 int		print_export(char **envp);

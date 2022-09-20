@@ -6,7 +6,7 @@
 /*   By: gpirro <gpirro@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/07 13:36:11 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/28 13:42:46 by gpirro        ########   odam.nl         */
+/*   Updated: 2022/09/19 17:05:07 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		ft_lstlen(t_list *lst);
 
 // exit_error.c
 void	exit_error_message(char	*message);
+void	exit_error_message_nr(char	*message, int nr);
 
 // find_paths.c
 char	*find_paths(char **env);
@@ -73,7 +74,6 @@ t_bool	signal_ctrl_d(char *str, char **env);
 t_bool	check_space_string(char *str);
 void	signal_quit(int sig);
 void	signal_ctrl_heredoc(int sig);
-int		is_split_c(char c);
 
 // find_shlvl.c
 void	adjust_shlvl(char **env, t_bool increment);

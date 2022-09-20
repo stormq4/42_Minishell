@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 11:02:43 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/10 13:38:08 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/09/14 15:53:59 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 static void	dup2_in_out(int fd, int in_out_fd)
 {
 	if (dup2(fd, in_out_fd) < 0)
+	{
 		exit_error_message(" ");
+	}
 	close(fd);
 }
 
@@ -49,7 +51,7 @@ void	find_last_input_fd(t_list **input, int fd)
 		else if (red->type == e_s_in)
 			fd = open(red->file, O_RDONLY);
 		if (fd < 0 || fd > OPEN_MAX)
-			exit_error_message(red->file);
+			exit_error_message_nr(red->file, 1);
 		in = in->next;
 		if (in)
 			red = (t_red *)in->ct;

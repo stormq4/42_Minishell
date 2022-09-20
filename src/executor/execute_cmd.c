@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   execute_cmd.c                                      :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
+/*   By: gpirro <gpirro@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/05/17 16:58:21 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/30 09:20:58 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/09/19 15:48:36 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ static char	*get_command(char *cmd, char **paths)
 	char	*path_cmd;
 	char	*tmp;
 
+	if (!paths || !cmd)
+		return (NULL);
+	if (ft_strchr(cmd, '/'))
+		return (NULL);
 	while (*paths)
 	{
 		tmp = ft_strjoin(*paths, "/");
@@ -57,6 +61,17 @@ static t_bool	check_cmd_is_dir(char *cmd)
 
 static void	execute_cmd(char *cmd_path, char **cmd_2d, char **paths)
 {
+	if (!cmd_path)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(cmd_2d[0], 2);
+		if (check_cmd_is_dir(cmd_2d[0]))
+			ft_putstr_fd(": No such file or directory\n", 2);
+		else
+			ft_putstr_fd(": command not found\n", 2);
+		g_error = 127;
+		exit(127);
+	}
 	g_error = 0;
 	if (execve(cmd_path, cmd_2d, paths) < 0)
 	{
@@ -76,6 +91,7 @@ void	execute_execve(char *cmd, t_pipex *p)
 	char	**cmd_2d;
 	char	*cmd_path;
 
+	cmd_path = NULL;
 	cmd_2d = ft_split(cmd, ' ');
 	ft_check_malloc(cmd_2d);
 	ft_split_null_termininate(cmd_2d);

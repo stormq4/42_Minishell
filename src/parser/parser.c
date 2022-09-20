@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/25 09:50:25 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/29 17:17:20 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/09/15 14:26:36 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
  * @brief appends a redirect or word from the token list
  * 
  */
-void	add_token_2_command(t_token *token, t_command *command, \
+t_bool	add_token_2_command(t_token *token, t_command *command, \
 t_list **token_lst)
 {
 	if (token->type == e_word)
 		append_word(token_lst, command, token);
 	else
-		append_redirect(token_lst, command, token);
+		if (!append_redirect(token_lst, command, token))
+			return (false);
+	return (true);
 }
 
 /**
@@ -61,21 +63,23 @@ static t_command	*new_command(void)
  * @param token_lst 
  * @return t_list* of commands i returned
  */
-t_list	*parser(t_list **token_lst)
+t_bool	parser(t_list **token_lst, t_list **b_lst)
 {
 	t_list		*cmd_lst;
-	t_list		*begin_cml;
 	t_command	*command;
 	t_token		*token;
 
 	command = new_command();
 	cmd_lst = ft_lstnew(command);
-	begin_cml = cmd_lst;
+	*b_lst = cmd_lst;
 	while (*token_lst)
 	{
 		token = (t_token *)(*token_lst)->ct;
 		if (token->type != e_pipe)
-			add_token_2_command(token, command, token_lst);
+		{
+			if (!add_token_2_command(token, command, token_lst))
+				return (false);
+		}
 		else
 		{
 			cmd_lst->next = ft_lstnew(new_command());
@@ -84,5 +88,5 @@ t_list	*parser(t_list **token_lst)
 			*token_lst = (*token_lst)->next;
 		}
 	}
-	return (begin_cml);
+	return (true);
 }

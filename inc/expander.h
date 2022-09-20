@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   expander.h                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gianlucapirro <gianlucapirro@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/05/16 12:57:08 by gpirro        #+#    #+#                 */
-/*   Updated: 2022/06/28 10:36:51 by sde-quai      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   expander.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gianlucapirro <gianlucapirro@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/16 12:57:08 by gpirro            #+#    #+#             */
+/*   Updated: 2022/09/16 18:03:26 by gianlucapir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,13 @@ int		add_space(t_list **split);
 int		split_item(char **line, t_list **split);
 int		replace_g_error_in_lst(t_list **split);
 void	free_split(t_list **lstsplit);
+int		find_len_until_special_char(char *var);
+t_list	*special_expand_order(char *var);
+int		env_in_special(char *str, char **envp);
+t_bool	has_special_expand_char(char *str);
+char	*replace_special_var(char *str, char **envp);
+t_bool	check_special_expand(char a);
+char	*order_lst_join(t_list	**order);
+void	free_order_lst(t_list *order);
 
 #endif

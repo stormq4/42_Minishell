@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/09 16:12:15 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/30 10:09:23 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/09/20 10:28:12 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	signal_ctrl_c(int sig)
 	g_error = 1;
 	rl_on_new_line();
 	rl_redisplay();
+	signal(SIGQUIT, SIG_IGN);
 }
 
 /**

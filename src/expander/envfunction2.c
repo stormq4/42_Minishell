@@ -1,16 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   envfunction2.c                                     :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/06/28 13:45:51 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/28 13:46:08 by sde-quai      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   envfunction2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gianlucapirro <gianlucapirro@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/28 13:45:51 by sde-quai          #+#    #+#             */
+/*   Updated: 2022/09/17 10:28:03 by gianlucapir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
+
+int	has_digit(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 char	*get_env_val(char *var, char **envp)
 {
@@ -27,6 +41,8 @@ char	*get_env_val(char *var, char **envp)
 		varlen == envvarlen)
 			return (ft_strchr(envp[i], '=') + 1);
 	}
+	if (has_digit(var))
+		return ("");
 	return (NULL);
 }
 

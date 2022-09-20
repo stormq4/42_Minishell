@@ -6,7 +6,7 @@
 /*   By: gpirro <gpirro@student.42.fr>                +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/16 18:55:10 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/28 13:44:31 by gpirro        ########   odam.nl         */
+/*   Updated: 2022/09/20 09:44:03 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static char	*check_arg_is_digit(char *cmd, char *str)
 		if (!ft_isdigit(*cmd))
 		{
 			g_error = 255;
+			ft_putstr_fd("exit\n", 2);
 			ft_putstr_fd("minishell: exit: ", 2);
 			print_first_error_arg(str);
 			ft_putstr_fd("numeric argument required\n", 2);

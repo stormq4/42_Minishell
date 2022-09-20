@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   export.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: gpirro <gpirro@student.42.fr>                +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/06/21 14:51:35 by gpirro        #+#    #+#                 */
-/*   Updated: 2022/06/28 13:48:21 by gpirro        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gianlucapirro <gianlucapirro@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/21 14:51:35 by gpirro            #+#    #+#             */
+/*   Updated: 2022/07/03 12:02:56 by gianlucapir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	err_in_export(char *args, char ***env, char *cmdline)
 {
-	if (ft_strlen(args) <= 1)
+	if (ft_strlen(args) < 1)
 	{
 		print_export((*env));
 		return (true);
@@ -36,7 +36,7 @@ t_bool	mini_export(char *cmdline, char ***env)
 
 	args = cmdline;
 	if (err_in_export(args, env, cmdline))
-		return (false);
+		return (true);
 	split_args = ft_split(args, ' ');
 	i = -1;
 	while (split_args[++i])

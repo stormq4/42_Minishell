@@ -20,6 +20,16 @@ export CC := 			gcc
 ## Headerfiles
 INC :=				-I ./inc
 
+INLCUDES =			builtins.h \
+					executor.h \
+					expander.h \
+					lexer.h \
+					libft.h \
+					minishell.h \
+					parser.h \
+					utils.h 
+
+INLCUDES := 		$(addprefix inc/, $(INLCUDES))
 
 ## Libft
 LIBFT := 			libft
@@ -41,7 +51,8 @@ SRC_MAIN :=			$(addprefix $(DIR_SRC)/$(DIR_MAIN)/, $(MAIN))
 
 # Minishell directory with files
 DIR_MINISHELL :=	minishell
-MINISHELL := 		free_shell.c 
+MINISHELL := 		free_shell.c \
+					run_shell.c
 
 SRC_MINISHELL :=	$(addprefix $(DIR_SRC)/$(DIR_MINISHELL)/, $(MINISHELL))
 
@@ -85,7 +96,8 @@ EXPANDER :=			expander.c \
 					utils.c \
 					split.c \
 					errcode.c \
-					free_split.c
+					free_split.c\
+					expand_specials.c
 
 SRC_EXPANDER :=		$(addprefix $(DIR_SRC)/$(DIR_EXPANDER)/, $(EXPANDER))
 
@@ -123,7 +135,7 @@ SRC_BUILTINS :=		$(addprefix $(DIR_SRC)/$(DIR_BUILTINS)/, $(BUILTINS))
 # All Source Files in variable
 SRC :=				$(SRC_UTILS) $(SRC_LEXER) $(SRC_MINISHELL) $(SRC_MAIN) $(SRC_PARSER) $(SRC_EXECUTOR) $(SRC_EXPANDER) $(SRC_BUILTINS)
 
-export	SRC_TEST := $(SRC_UTILS) $(SRC_LEXER) $(SRC_MINISHELL) $(SRC_PARSER) $(SRC_EXECUTOR) $(SRC_EXPANDER)
+export	SRC_TEST := $(SRC_UTILS) $(SRC_LEXER) $(SRC_MINISHELL) $(SRC_PARSER) $(SRC_EXECUTOR) $(SRC_EXPANDER) $(SRC_BUILTINS)
 
 ## Object files from source files
 OBJ_DIR :=			obj
@@ -135,6 +147,7 @@ export GREEN := 			"\033[1;32m"
 export CYAN := 				"\033[1;36m"
 export RED := 				"\033[1;31m"
 export PURPLE := 			"\033[1;35m"
+export END :=				"\033[0m" 
 
 ## Unit_test
 UNIT_TEST := unit_test
@@ -150,29 +163,37 @@ drun : all
 
 sanitize : fclean
 	@$(MAKE) sanitize=1
-	@echo $(PURPLE)"Compiled with sanitize=address [OK]"
+	@echo $(PURPLE)"Compiled with sanitize=address [OK]"$(END)
+
+utest : fclean
+	@rm -rf $(NAME)
+	@$(MAKE) -C $(UNIT_TEST) test
+
+itest : $(NAME)
+	@$(MAKE) -C integration_test test
 
 $(LIBA) :
 	@$(MAKE) -C $(LIBFT) bonus
 
-$(NAME) : $(LIBA) $(OBJ)
-	@echo $(CYAN)"Object files created for MINISHELL [OK]"
-	@$(CC) $(CFLAGS) $(INC) $(READLINE) $^ -o $(NAME)
-	@echo $(GREEN)"MINISHELL compiled [OK]"
+$(NAME) : $(LIBA) $(OBJ) $(INLCUDES)
+	@echo $(CYAN)"Object files created for MINISHELL [OK]"$(END)
+	$(CC) $(CFLAGS) $(INC) $(READLINE) $(LIBA) $(OBJ) -o $(NAME)
+	@echo $(GREEN)"MINISHELL compiled [OK]"$(END)
 
-$(OBJ_DIR)/%.o : %.c
+$(OBJ_DIR)/%.o : %.c $(INLCUDES)
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 clean :
 	@rm -rf obj
-	@echo $(RED) "Deleting object files from MINISHELL [OK]"
+	@echo $(RED)"Deleting object files from MINISHELL [OK]"$(END)
 	@$(MAKE) clean -C $(LIBFT)
 
 fclean : clean
 	@$(MAKE) fclean -C $(LIBFT)
+	@$(MAKE) fclean -C $(UNIT_TEST)
 	@rm -rf $(NAME)
-	@echo $(RED) "Deleting MINISHELL Executable [OK]"
+	@echo $(RED)"Deleting MINISHELL Executable [OK]"$(END)
 
 re : fclean all
 

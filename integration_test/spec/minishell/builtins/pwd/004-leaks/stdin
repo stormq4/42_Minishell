@@ -1,0 +1,3 @@
+cd /Users/$USER
+pwd > lala.txt | rm lala.txt
+leaks minishell | grep "leaked" 

@@ -6,7 +6,7 @@
 /*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/14 10:24:41 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/28 13:20:47 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/07/01 14:23:30 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_bool	shlvl_exists(char **env)
 
 char	*find_shlvl(char **env)
 {
-	while (ft_strncmp("SHLVL", *env, 5) && *env)
+	while (*env && ft_strncmp("SHLVL", *env, 5))
 		env++;
 	if (*env)
 		return (*env + 6);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   utils.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: sde-quai <sde-quai@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2022/06/28 10:35:12 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/06/28 13:42:44 by sde-quai      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gianlucapirro <gianlucapirro@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/28 10:35:12 by sde-quai          #+#    #+#             */
+/*   Updated: 2022/09/16 18:57:19 by gianlucapir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,47 @@ char	*lst_join(t_list **split)
 	{
 		tmp = new;
 		expand = (t_expand *)tmp_split->ct;
-		new = ft_strjoin(tmp, expand->split);
+		new = ft_strjoin(tmp, (char *)expand->split);
 		if (!new)
 			exit_error_message("");
 		free(tmp);
 		tmp_split = tmp_split->next;
 	}
 	return (new);
+}
+
+char	*order_lst_join(t_list	**order)
+{
+	char	*new;
+	char	*tmp;
+	t_list	*current;
+
+	new = ft_strdup("");
+	if (!new)
+		exit_error_message("");
+	current = (*order);
+	while (current != NULL)
+	{
+		tmp = new;
+		new = ft_strjoin(tmp, (char *)current->ct);
+		if (!new)
+			exit_error_message("");
+		free(tmp);
+		current = current->next;
+	}
+	return (new);
+}
+
+void	free_order_lst(t_list *order)
+{
+	t_list		*tmp;
+
+	while (order != NULL)
+	{
+		free(order->ct);
+		tmp = order->next;
+		free(order);
+		order = tmp;
+	}
+	free(order);
 }

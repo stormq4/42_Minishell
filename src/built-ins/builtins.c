@@ -6,7 +6,7 @@
 /*   By: gianlucapirro <gianlucapirro@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/13 14:36:57 by sde-quai      #+#    #+#                 */
-/*   Updated: 2022/07/01 13:23:51 by sde-quai      ########   odam.nl         */
+/*   Updated: 2022/09/15 14:34:05 by sde-quai      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_bool	check_clean_builtin(char *str, int size)
 
 t_bool	all_builtins(char *cmd, char ***envp)
 {
+	if (!cmd || !envp)
+		return (false);
 	if (!ft_strncmp(cmd, "env", 3) && check_clean_builtin(cmd, 3))
 		return (mini_env(*envp, cmd + 3));
 	else if (!ft_strncmp(cmd, "exit", 4) && check_clean_builtin(cmd, 4))
@@ -58,5 +60,18 @@ t_bool	single_cmd_builtins(char *cmd, char ***envp)
 		return (mini_export(cmd + 6, envp));
 	else if (!ft_strncmp(cmd, "unset", 5) && check_clean_builtin(cmd, 5))
 		return (mini_unset(cmd + 5, envp));
+	return (false);
+}
+
+t_bool	single_cmd_builtins_check(char *cmd)
+{
+	if (!ft_strncmp(cmd, "exit", 4) && check_clean_builtin(cmd, 4))
+		return (true);
+	else if (!ft_strncmp(cmd, "cd", 2) && check_clean_builtin(cmd, 2))
+		return (true);
+	else if (!ft_strncmp(cmd, "export", 6) && check_clean_builtin(cmd, 6))
+		return (true);
+	else if (!ft_strncmp(cmd, "unset", 5) && check_clean_builtin(cmd, 5))
+		return (true);
 	return (false);
 }

@@ -68,17 +68,18 @@ else
 ALL_OBJS = $(OBJS)
 endif
 
-RED := "\033[1;31m"
-GREEN := "\033[1;32m"
-CYAN := "\033[1;36m"
+RED :=		"\033[1;31m"
+GREEN :=	"\033[1;32m"
+CYAN :=		"\033[1;36m"
+END :=		"\033[0m" 
 
 all : $(NAME) 
 
 %.o : %.c $(HEADFILES)
-	@$(CC) -c $(CFLAGS) -o $@ $<
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 $(NAME): $(ALL_OBJS)
-	@echo $(GREEN)"Object files created for LIBFT [OK]"
+	@echo $(GREEN)"Object files created for LIBFT [OK]"$(END)
 	@ar -ru $(NAME) $^
 
 bonus:
@@ -86,11 +87,11 @@ bonus:
 
 clean:
 	@rm -f $(OBJS) $(OBJS_BONUS)
-	@echo $(RED) "Deleting object files from libft [OK]"
+	@echo $(RED) "Deleting object files from libft [OK]"$(END)
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo $(RED) "Deleting library file libft.a [OK]"
+	@echo $(RED) "Deleting library file libft.a [OK]"$(END)
 
 re: fclean all
 

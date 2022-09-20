@@ -1,0 +1,2 @@
+expected_to be_equal "cp: *.c: No such file or directory"
+expected_to exit_with_status 1
